@@ -1,4 +1,4 @@
-package com.lenin.smart_city.models;
+package com.lenin.smart_city.models.auth;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
