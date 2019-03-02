@@ -1,17 +1,16 @@
-package com.lenin.smart_city.models;
+package com.lenin.smart_city.models.locations;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name="roles")
-public class Role {
+@Entity(name="categories")
+@Table(name="categories")
+public class Category {
 	
 	@Id
 	long id;
 	
 	String name;
 
-	
 }
