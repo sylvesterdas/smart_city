@@ -7,5 +7,5 @@ import com.lenin.smart_city.models.auth.User;
 public interface UserRepository extends CrudRepository<User, Long> {
 
 	
-	
+	User findByUsername(String username);
 }

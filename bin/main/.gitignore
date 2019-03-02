@@ -1,2 +1,5 @@
 /com/
 /templates/
+/static/
+/assets/
+/validation.properties
