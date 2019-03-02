@@ -1,8 +1,8 @@
 package com.lenin.smart_city.models.locations;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Table(name="cities")
@@ -10,11 +10,11 @@ import javax.persistence.Table;
 public class City {
 
 	@Id
-	long id;
+	public long id;
 	
-	String name;
+	public String name;
 	
-	@Column(name="state_id")
-	long stateId;
+	@ManyToOne
+	public State state;
 	
 }

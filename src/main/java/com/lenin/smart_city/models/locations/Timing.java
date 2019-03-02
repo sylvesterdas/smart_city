@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity(name="timings")
@@ -12,15 +13,15 @@ import javax.persistence.Table;
 public class Timing {
 
 	@Id
-	long id;
+	public long id;
 
 	@Column(name="start_time")
-	Timestamp startTime;
+	public Timestamp startTime;
 	
 	@Column(name="end_time")
-	Timestamp endTime;
+	public Timestamp endTime;
 	
-	@Column(name="place_id")
-	long placeId;
+	@ManyToOne
+	public Place place;
 	
 }

@@ -3,6 +3,7 @@ package com.lenin.smart_city.models.locations;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity(name="addresses")
@@ -10,22 +11,22 @@ import javax.persistence.Table;
 public class Address {
 
 	@Id
-	long id;
+	public long id;
 	
 	@Column(name="line_1")
-	String line1;
+	public String line1;
 	
 	@Column(name="line_2")
-	String line2;
+	public String line2;
 	
-	String landmark;
+	public String landmark;
 	
-	@Column(name="city_id")
-	long cityId;
+	@ManyToOne
+	public City city;
 	
-	double latitude;
+	public double latitude;
 	
-	double longitude;
+	public double longitude;
 	
 	
 }

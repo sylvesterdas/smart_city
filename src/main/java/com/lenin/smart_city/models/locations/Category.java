@@ -9,8 +9,8 @@ import javax.persistence.Table;
 public class Category {
 	
 	@Id
-	long id;
+	public long id;
 	
-	String name;
+	public String name;
 
 }

@@ -1,31 +1,65 @@
 package com.lenin.smart_city.models.trips;
 
-import java.sql.Timestamp;
+import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import com.lenin.smart_city.models.auth.User;
+import com.lenin.smart_city.models.interactions.Rating;
+import com.lenin.smart_city.models.locations.Place;
 
 @Entity(name="posts")
 @Table(name="posts")
 public class Post {
 	
 	@Id
-	long id;
+	public long id;
 	
-	String title;
+	@Column(length=50)
+	public String title;
+
+	@Column(length=100)
+	public String subtitle;
 	
-	@Column(name="place_id")
-	long placeId;
+	@Column(columnDefinition="text")
+	public String body;
 	
-	@Column(name="posted_at")
-	Timestamp postedAt;
+	@ManyToOne
+	public Place place;
 	
-	@Column(name="posted_by")
-	long postedBy;
+	@ManyToOne
+	public User postedBy;
 	
 	@Column(name="view_count")
-	int viewCount;
-
+	public int viewCount;
+	
+	@OneToMany
+	public Set<User> likes;
+	
+	@OneToMany
+	public Set<User> dislikes;
+	
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+	public Set<Rating> ratings;
+	
+	@UpdateTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	public Date updated;
+	
+	@CreationTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	public Date posted;
+	
 }

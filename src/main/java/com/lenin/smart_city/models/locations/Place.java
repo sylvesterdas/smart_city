@@ -1,8 +1,12 @@
 package com.lenin.smart_city.models.locations;
 
+import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Table(name="places")
@@ -10,15 +14,17 @@ import javax.persistence.Table;
 public class Place {
 	
 	@Id
-	long id;
+	public long id;
 	
-	String title;
+	public String title;
 	
-	String details;
+	public String details;
+	
+	public String picture;
+	
+	@OneToOne
+	public Address address;
 
-	@Column(name="address_id")
-	long addressId;
-	
-	String picture;
-
+	@ManyToMany
+	public Collection<Category> categories;
 }

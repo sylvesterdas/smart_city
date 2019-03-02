@@ -3,22 +3,25 @@ package com.lenin.smart_city.models.trips;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.lenin.smart_city.models.auth.User;
 
 @Entity(name="bookings")
 @Table(name="bookings")
 public class Booking {
 
 	@Id
-	long id;
+	public long id;
 	
-	@Column(name="trip_id")
-	long tripId;
+	@ManyToOne
+	public Trip trip;
 	
-	@Column(name="user_id")
-	long userId;
+	@ManyToOne
+	public User user;
 	
 	@Column(name="is_cancelled")
-	boolean isCancelled;
+	public boolean isCancelled;
 	
 }

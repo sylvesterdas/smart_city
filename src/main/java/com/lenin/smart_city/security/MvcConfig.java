@@ -46,6 +46,8 @@ public class MvcConfig extends WebSecurityConfigurerAdapter implements WebMvcCon
                 .roles("USER")
                 .build();
 
+        
+        
         return new InMemoryUserDetailsManager(user);
     }
 	
