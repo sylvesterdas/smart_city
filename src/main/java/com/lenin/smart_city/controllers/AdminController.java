@@ -2,7 +2,6 @@ package com.lenin.smart_city.controllers;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,8 +17,6 @@ import com.lenin.smart_city.repositories.RoleRepository;
 import com.lenin.smart_city.repositories.StatesRepository;
 import com.lenin.smart_city.repositories.UserRepository;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,9 +24,7 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -37,7 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(path="/admin")
 public class AdminController {
 
-    private static final Logger log = LoggerFactory.getILoggerFactory().getLogger(AdminController.class.getSimpleName());
+    // private static final Logger log = LoggerFactory.getILoggerFactory().getLogger(AdminController.class.getSimpleName());
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
