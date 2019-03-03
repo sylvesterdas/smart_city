@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import javax.sql.DataSource;
 
@@ -34,10 +35,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                     "/",
                     "/login",
-                    "/fragments/headLogin",
                     "/css/**",
                     "/js/**",
-                    "/metronic/**",
                     "/images/**",
                     "/scripts/**",
                     "/favicon.ico",
@@ -47,10 +46,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login")
+                .successHandler(myAuthenticationSuccessHandler())
                 .permitAll()
                 .and()
                 .logout()
                 .permitAll();
+    }
+    
+    @Bean
+    public AuthenticationSuccessHandler myAuthenticationSuccessHandler() {
+        return new LoginAuthSuccessHandler();
     }
 
     @Override

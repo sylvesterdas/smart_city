@@ -6,6 +6,12 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Run (Launch)",
+            "request": "launch",
+            "mainClass": "com.lenin.smart_city.SmartCityApplication"
+        },
+        {
+            "type": "java",
             "name": "Debug (Launch) - Current File",
             "request": "launch",
             "mainClass": "${file}"

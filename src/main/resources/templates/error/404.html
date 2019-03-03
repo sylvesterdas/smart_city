@@ -13,24 +13,19 @@
 <html class="no-js" lang="" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <!--<![endif]-->
-<head th:replace="fragments/head :: head"></head>
 
 <!-- START :: Body -->
 <body class="page-header-fixed page-quick-sidebar-over-content">
 <!-- START :: Header -->
-<div th:replace="fragments/body :: header"></div>
 <!-- END :: Header -->
 <div class="clearfix"></div>
 
 <!-- START :: Container -->
 <div class="page-container">
-    <div th:replace="fragments/sidebar :: sidebar(${active})"></div>
-    <script type="application/javascript" th:replace="fragments/sidebar :: sidebarScripts"></script>
     <!-- START :: Page -->
     <div class="page-content-wrapper">
         <!-- START :: Page Container -->
         <div class="page-content">
-            <div th:replace="fragments/body :: contentHeader"></div>
             <!-- START :: Body Content -->
             <div class="row">
                 <div class="col-md-12">
@@ -48,9 +43,6 @@
     <!-- END :: Page -->
 </div>
 <!-- END :: Container -->
-
-<div th:replace="fragments/body :: footerDiv"></div>
-<div th:replace="fragments/body :: footerScripts"></div>
 
 <!-- Add your scripts here-->
 
