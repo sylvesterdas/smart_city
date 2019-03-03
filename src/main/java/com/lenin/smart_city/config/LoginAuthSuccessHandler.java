@@ -14,11 +14,8 @@ import com.lenin.smart_city.models.auth.Role;
 import com.lenin.smart_city.repositories.RoleRepository;
 
 import java.io.IOException;
-import java.util.logging.Logger;
 
 public class LoginAuthSuccessHandler implements AuthenticationSuccessHandler {
-
-    private static final Logger log = Logger.getLogger(LoginAuthSuccessHandler.class.getName());
 
     @Autowired
     private RoleRepository roleRepository;
