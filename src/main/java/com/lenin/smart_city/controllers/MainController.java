@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * MainController
  */
 @Controller
-@RequestMapping(path="")
+@RequestMapping(path="/")
 public class MainController {
 
-    @GetMapping(path="/")
+    @GetMapping(path="")
     public String index(Principal principal) {
         return "welcome";
     }

@@ -18,5 +18,8 @@ public interface RoleRepository extends JpaRepository<Role, Long> {
 
     @Query(nativeQuery=true, value=checkAdminQuery)
     int checkAdmin(String email);
+
+    @Query(nativeQuery=true, value="select * from roles where id=?")
+    Role getRoleById(long id);
     
 }

@@ -10,7 +10,7 @@
 <head>
     <link media="all" type="text/css" rel="stylesheet" href="https://admin.lash3pl.com/assets/metronic/global/plugins/bootstrap/css/bootstrap.min.css">
     <link media="all" type="text/css" rel="stylesheet" href="https://admin.lash3pl.com/assets/metronic/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css">
-    <title>User List - Project</title>
+    <title>States - Project</title>
     <style>
         /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
         .row.content {height: 550px}
@@ -18,7 +18,7 @@
         /* Set gray background color and 100% height */
         .sidenav {
             background-color: #f1f1f1;
-            height: 100%;
+            height: 100vh;
         }
             
         /* On small screens, set height to 'auto' for the grid */
@@ -50,27 +50,23 @@
             <div th:replace="admin/elements/sidebar.html :: sidebar"></div>
 
             <div class="col-sm-9">
-                <h3 class="title text-center">Users List</h3>
+                <h3 class="title text-center">States</h3>
 
-                <div class="create_form">
-                    <form class="form form-inline well" th:object="${user}" action="#" th:action="@{/admin/users}" method="post">
-                        <h4 class="text-center">Add New User</h4>
+                <div class="create_form form-inline col-sm-12 well">
+                    <form class="form" action="#" th:action="@{/admin/states}" method="post">
+                        <h4 class="text-center">Add States</h4>
                         <ul class="errors list-group" th:if="${not #lists.isEmpty(errors)}">
-                            <li class="list-group-item" th:each="error : ${errors}" th:text="${error}"></p>
+                            <li class="list-group-item" th:each="error : ${errors}" th:text="${error}"></li>
                         </ul>
                         <div class="form-group">
-                            <label for="email" class="control-label">Email:</label>
-                            <input type="text" name="email" id="email" class="form-control" value=" ">
+                            <label for="country" class="control-label">Country name:</label>
+                            <select type="text" name="country" id="country" class="form-control" value="" placeholder="State name">
+                                <option th:each="country : ${countries}" th:value="${country.id}" th:text="${country.name}"></option>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="password" class="control-label">Password:</label>
-                            <input type="password" name="password" id="password" class="form-control" value="">
-                        </div>
-                        <div class="form-group">
-                            <label for="role" class="control-label">Role:</label>
-                            <Select type="role" name="role" id="role" class="form-control">
-                                <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"></option>
-                            </Select>
+                            <label for="states" class="control-label">State name:</label>
+                            <input type="text" name="states" id="states" class="form-control" value="" placeholder="State name">
                         </div>
                         <div class="form-group form-actions">
                             <input type="submit" id="submit" class="form-control">
@@ -78,20 +74,20 @@
                     </form>
                 </div>
 
-                <div class="table-responsive well" th:if="${not #lists.isEmpty(users)}">
+                <div class="table-responsive well col-sm-12" th:if="${not #lists.isEmpty(states)}">
                     <table class="table table-hover table-bordered datatable">
                         <thead>
                             <tr>
                                 <th>Sr</th>
-                                <th>Email</th>
-                                <th>Role</th>
+                                <th>States</th>
+                                <th>Country</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="user : ${users}">
-                                <td> <p th:text="${user.id}"></p> </td>
-                                <td> <p th:text="${user.email}"></p> </td>
-                                <td> <p th:text="${user.role.name}"></p> </td>
+                            <tr th:each="state : ${states}">
+                                <td> <p th:text="${state.id}"></p> </td>
+                                <td> <p th:text="${state.name}"></p> </td>
+                                <td> <p th:text="${state.country.name}"></p> </td>
                             </tr>
                         </tbody>
                     </table>

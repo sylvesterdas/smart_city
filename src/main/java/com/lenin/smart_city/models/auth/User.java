@@ -1,10 +1,9 @@
 package com.lenin.smart_city.models.auth;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
-@Table(name = "users")
+@Table(name = "users", uniqueConstraints=@UniqueConstraint(columnNames={"email"}))
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
