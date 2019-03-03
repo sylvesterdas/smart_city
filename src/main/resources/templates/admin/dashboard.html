@@ -8,21 +8,109 @@
 <!--<![endif]-->
 <!-- START :: Head -->
 <head>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" th:href="@{css/adminDashboard.css}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style>
+        /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+        .row.content {height: 550px}
+        
+        /* Set gray background color and 100% height */
+        .sidenav {
+        background-color: #f1f1f1;
+        height: 100%;
+        }
+            
+        /* On small screens, set height to 'auto' for the grid */
+        @media screen and (max-width: 767px) {
+        .row.content {height: auto;} 
+        }
+    </style>
 </head>
 <body class="login">
-<div class="content">
-    <h1>test</h1>
-    <h3 th:text="${name}"></h3>
-</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-<script>
-    jQuery(document).ready(function () {
+    
         
-    });
-</script>
+    <div class="container-fluid">
+        <div class="row content">
+            <div class="col-sm-3 sidenav hidden-xs">
+            <h2>Logo</h2>
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a href="#section1">Dashboard</a></li>
+                <li><a href="#section2">Age</a></li>
+                <li><a href="#section3">Gender</a></li>
+                <li><a href="#section3">Geo</a></li>
+            </ul><br>
+            </div>
+            <br>
+            
+            <div class="col-sm-9">
+            <div class="well">
+                <h4>Dashboard</h4>
+                <p>Some text..</p>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                <div class="well">
+                    <h4>Users</h4>
+                    <p>1 Million</p> 
+                </div>
+                </div>
+                <div class="col-sm-3">
+                <div class="well">
+                    <h4>Pages</h4>
+                    <p>100 Million</p> 
+                </div>
+                </div>
+                <div class="col-sm-3">
+                <div class="well">
+                    <h4>Sessions</h4>
+                    <p>10 Million</p> 
+                </div>
+                </div>
+                <div class="col-sm-3">
+                <div class="well">
+                    <h4>Bounce</h4>
+                    <p>30%</p> 
+                </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                <div class="well">
+                    <p>Text</p> 
+                    <p>Text</p> 
+                    <p>Text</p> 
+                </div>
+                </div>
+                <div class="col-sm-4">
+                <div class="well">
+                    <p>Text</p> 
+                    <p>Text</p> 
+                    <p>Text</p> 
+                </div>
+                </div>
+                <div class="col-sm-4">
+                <div class="well">
+                    <p>Text</p> 
+                    <p>Text</p> 
+                    <p>Text</p> 
+                </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-8">
+                <div class="well">
+                    <p>Text</p> 
+                </div>
+                </div>
+                <div class="col-sm-4">
+                <div class="well">
+                    <p>Text</p> 
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
