@@ -1,0 +1,13 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="sidebar" class="col-sm-3 sidenav hidden-xs">
+    <h2>Project</h2>
+    <ul class="nav nav-pills nav-stacked">
+        <li class="active"><a th:href="@{/admin}">Dashboard</a></li>
+        <li><a th:href="@{/admin/countries}">Country</a></li>
+        <li><a th:href="@{/admin/states}">States</a></li>
+        <li><a th:href="@{/admin/cities}">City</a></li>
+    </ul><br>
+</div>
+
+</html>
