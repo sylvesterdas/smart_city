@@ -4,15 +4,12 @@ import java.io.IOException;
 import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.junit.experimental.categories.Categories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -23,7 +20,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.lenin.smart_city.models.auth.User;
 import com.lenin.smart_city.models.locations.Address;
 import com.lenin.smart_city.models.locations.Category;
 import com.lenin.smart_city.models.locations.City;
@@ -33,7 +29,6 @@ import com.lenin.smart_city.models.trips.Trip;
 import com.lenin.smart_city.repositories.AddressRepository;
 import com.lenin.smart_city.repositories.CategoriesRepository;
 import com.lenin.smart_city.repositories.CitiesRepository;
-import com.lenin.smart_city.repositories.ItenariesRepository;
 import com.lenin.smart_city.repositories.PlacesRepository;
 import com.lenin.smart_city.repositories.RoleRepository;
 import com.lenin.smart_city.repositories.TripsRepository;
@@ -51,8 +46,6 @@ public class TripController {
 	@Autowired
 	private PlacesRepository placesRepository;
 	@Autowired
-	private ItenariesRepository itenariesRepository;
-	@Autowired
 	private AddressRepository addressRepository;
 
 	@Autowired
@@ -63,6 +56,45 @@ public class TripController {
 	private boolean checkAdmin(String email) {
         int role = roleRepository.checkAdmin(email);
         return role == 1;
+    }
+	
+	@GetMapping(path="categories")
+    public ModelAndView adminCatgeories(HttpServletRequest request, HttpServletResponse response, Principal principal) throws IOException {
+        String principalName = principal.getName();
+
+        if (checkAdmin(principalName)) {
+            ModelAndView m = new ModelAndView("admin/categories");
+            m.addObject("categories", categoriesRepository.findAll());
+            return m;
+        } else {
+            redirectStrategy.sendRedirect(request, response, "/");
+            return null;
+        }
+    }
+    
+    @PostMapping(path="categories")
+    public ModelAndView newCatgeories(HttpServletRequest request, HttpServletResponse response, Principal principal) throws IOException {
+        String principalName = principal.getName();
+
+        if (checkAdmin(principalName)) {
+        	Category categories = new Category();
+        	categories.name = request.getParameter("category").isEmpty() ? null : request.getParameter("category");
+            try {
+            	if (categoriesRepository.checkExistance(categories.name) > 0)
+                    throw new DataIntegrityViolationException("Category already exist.");
+                categoriesRepository.saveAndFlush(categories);
+            } catch (Exception e) {
+                ModelAndView m = new ModelAndView("admin/categories");
+                m.addObject("errors", new String[]{"Something went wrong."});
+                e.printStackTrace();
+                m.addObject("categories", categoriesRepository.findAll());
+                return m;
+            }
+            redirectStrategy.sendRedirect(request, response, "/admin/categories");
+        } else {
+            redirectStrategy.sendRedirect(request, response, "/");
+        }
+        return null;
     }
 	
 	@GetMapping(path="trips")
@@ -145,6 +177,7 @@ public class TripController {
 					
 					itenaries.add(itenary);
 				}
+				trip.name = title;
 				trip.itenaries = itenaries;
 				trip = tripsRepository.saveAndFlush(trip);
 			} catch (DataIntegrityViolationException e) {
