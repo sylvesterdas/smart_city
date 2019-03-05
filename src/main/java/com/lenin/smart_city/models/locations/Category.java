@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity(name="categories")
 @Table(name="categories")
@@ -14,6 +15,7 @@ public class Category {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	public long id;
 	
+	@NotBlank
 	public String name;
 
 }

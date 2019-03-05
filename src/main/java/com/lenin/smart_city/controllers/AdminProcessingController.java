@@ -4,7 +4,9 @@ import com.lenin.smart_city.models.auth.Role;
 import com.lenin.smart_city.models.auth.User;
 import com.lenin.smart_city.models.locations.Country;
 import com.lenin.smart_city.models.locations.Category;
+import com.lenin.smart_city.models.locations.Place;
 import com.lenin.smart_city.repositories.CategoriesRepository;
+import com.lenin.smart_city.repositories.PlaceRepository;
 import com.lenin.smart_city.repositories.RoleRepository;
 import com.lenin.smart_city.repositories.UserRepository;
 
@@ -14,6 +16,7 @@ import java.security.Principal;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -37,6 +40,9 @@ public class AdminProcessingController {
     
     @Autowired
     private RoleRepository roleRepository;
+    
+    @Autowired
+    private PlaceRepository placeRepository;
     
     @Autowired
     private CategoriesRepository categoriesRepository;
@@ -68,14 +74,15 @@ public class AdminProcessingController {
 
         if (checkAdmin(principalName)) {
         	Category categories = new Category();
-        	categories.name = request.getParameter("category");
+        	categories.name = request.getParameter("category").isEmpty() ? null : request.getParameter("category");
             try {
             	if (categoriesRepository.checkExistance(categories.name) > 0)
                     throw new DataIntegrityViolationException("Category already exist.");
                 categoriesRepository.saveAndFlush(categories);
-            } catch (DataIntegrityViolationException e) {
+            } catch (Exception e) {
                 ModelAndView m = new ModelAndView("admin/categories");
-                m.addObject("errors", new String[]{"Duplicate categories"});
+                m.addObject("errors", new String[]{"Something went wrong."});
+                e.printStackTrace();
                 m.addObject("categories", categoriesRepository.findAll());
                 return m;
             }
@@ -84,6 +91,20 @@ public class AdminProcessingController {
             redirectStrategy.sendRedirect(request, response, "/");
         }
         return null;
+    }
+    
+    @GetMapping(path="places")
+    public ModelAndView adminPlaces(HttpServletRequest request, HttpServletResponse response, Principal principal) throws IOException {
+        String principalName = principal.getName();
+
+        if (checkAdmin(principalName)) {
+            ModelAndView m = new ModelAndView("admin/places");
+            m.addObject("places", placeRepository.findAll());
+            return m;
+        } else {
+            redirectStrategy.sendRedirect(request, response, "/");
+            return null;
+        }
     }
     
     
