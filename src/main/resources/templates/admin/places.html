@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html lang="en" class="ie8 no-js" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
+<!--[if IE 9]>
+<html lang="en" class="ie9 no-js" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+<!-- START :: Head -->
+<head>
+    <link media="all" type="text/css" rel="stylesheet" href="https://admin.lash3pl.com/assets/metronic/global/plugins/bootstrap/css/bootstrap.min.css">
+    <link media="all" type="text/css" rel="stylesheet" href="https://admin.lash3pl.com/assets/metronic/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+    <title>Place List - Project</title>
+    <style>
+        /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+        .row.content {height: 550px}
+        
+        /* Set gray background color and 100% height */
+        .sidenav {
+            background-color: #f1f1f1;
+            height: 100%;
+        }
+            
+        /* On small screens, set height to 'auto' for the grid */
+        @media screen and (max-width: 767px) {
+            .row.content {height: auto;} 
+        }
+
+        .table-responsive {
+            margin: 2rem 0 0 0;
+        }
+
+        .create-form {
+            margin-top: 10px;
+            padding-top: 10px;
+        }
+
+        .form-group {
+            margin: 1rem 1rem 1rem 2rem;
+        }
+
+        .errors {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row content">
+            <div th:replace="admin/elements/sidebar.html :: sidebar"></div>
+
+            <div class="col-sm-9">
+                <h3 class="title text-center">Places List</h3>
+
+                <div class="create-form well">
+
+                    <form class="" action="#" th:action="@{/admin/places}" method="POST">
+                    
+                        <hr><h4>Add new</h4><hr>
+                        <div class="form-group">
+                            <label for="name" class="control-label">Title:</label>
+                            <input class="form-control" type="text" name="name" id="name">
+                        </div>
+
+                        <div class="form-group row">
+                        	<label for="categories" class="">Categories:</label>
+                            <select class="mdb-select col-md-6" multiple searchable="Search here.." name="categories" id="categories" th:if="${not #lists.isEmpty(categories)}">
+                                <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="details">Details:</label>
+                            <textarea class="form-control" type="text" name="details" id="details"></textarea>
+                        </div>
+                        <hr><h4>Address</h4><hr>
+                        <div class="address">
+                            <div class="form-group">
+                                <label for="line1" class="control-label">Address Line 1</label>
+                                <input class="form-control" type="text" name="line1" id="line1">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="line2" class="control-label">Address Line 2</label>
+                                <input class="form-control" type="text" name="line2" id="line2">
+                            </div>
+
+							<div class="form-inline">
+                                <div class="form-group">
+                                    <label for="landmark" class="">Landmark</label>
+                                    <input class="form-control" type="text" name="landmark" id="landmark">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="cities" class="">City(Ctrl + select):</label>
+                                    <select class="mdb-select" name="cities" id="cities" th:if="${not #lists.isEmpty(cities)}">
+                                        <option th:each="city : ${cities}" th:value="${city.id}" th:text="${city.name}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        	<div class="form-inline">
+                                <div class="form-group">
+                                    <label for="latitude" class="">Latitude</label>
+                                    <input class="form-control" type="number" step="0.000000001" name="latitude" id="latitude">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="longitude" class="">Longitude</label>
+                                    <input class="form-control" type="number" step="0.000000001" name="longitude" id="longitude">                                    
+                                </div>
+                            </div>
+                            <div class="form-group form-actions text-center">
+                            	<input class="btn btn-md btn-primary" type="submit" value="Save new place" ></input>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="table-responsive well" >
+                    <table class="table table-hover table-bordered datatable">
+                        <thead>
+                            <tr>
+                                <th>Place id</th>
+                                <th>Place name</th>
+                                <th>Place description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="place : ${places}">
+                                <td> <p th:text="${place.id}"></p> </td>
+                                <td> <p th:text="${place.title}"></p> </td>
+                                <td> <p th:text="${place.details}"></p> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="https://admin.lash3pl.com/assets/metronic/global/plugins/jquery-1.11.0.min.js"></script>
+    <script src="https://admin.lash3pl.com/assets/metronic/global/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://admin.lash3pl.com/assets/metronic/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="https://admin.lash3pl.com/assets/metronic/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>    
+	<script>
+        jQuery(document).ready(function () {
+            $(".table.datatable").DataTable({
+                "bPaginate": false,
+            });
+		  	$('.mdb-select').selectpicker();
+        });
+    </script>
+</body>
+</html>
