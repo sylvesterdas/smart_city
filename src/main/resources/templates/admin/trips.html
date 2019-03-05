@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html lang="en" class="ie8 no-js" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
+<!--[if IE 9]>
+<html lang="en" class="ie9 no-js" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+<!-- START :: Head -->
+<head>
+    <link media="all" type="text/css" rel="stylesheet" href="https://admin.lash3pl.com/assets/metronic/global/plugins/bootstrap/css/bootstrap.min.css">
+    <link media="all" type="text/css" rel="stylesheet" href="https://admin.lash3pl.com/assets/metronic/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css">
+    <title>User List - Project</title>
+    <style>
+        /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+        .row.content {height: 550px}
+        
+        /* Set gray background color and 100% height */
+        .sidenav {
+            background-color: #f1f1f1;
+            height: 100%;
+        }
+            
+        /* On small screens, set height to 'auto' for the grid */
+        @media screen and (max-width: 767px) {
+            .row.content {height: auto;} 
+        }
+
+        .table-responsive {
+            margin: 2rem 0 0 0;
+        }
+
+        .create-form {
+            margin-top: 10px;
+            padding-top: 10px;
+        }
+
+        .form-group {
+            margin: 1rem 1rem 1rem 2rem;
+        }
+
+        .errors {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row content">
+            <div th:replace="admin/elements/sidebar.html :: sidebar"></div>
+
+            <div class="col-sm-9">
+                <h3 class="title text-center">Trips List</h3>
+
+                <div class="create-form well">
+                	<h3> Plan new trip </h3>
+                	<form class="form" method="POST" th:action="@{/admin/trips}" >
+                	<div class="row">
+                		<div class="form-group col-md-3">
+                            <label for="name" class="control-label">Title: </label>
+                            <input class="form-control col-md-12" type="text" name="name" id="name">
+                		</div>
+                	
+                		<div class="form-group col-md-3">
+                            <label for="start-date" class="control-label col-md-12">Start date: </label>
+                            <input class="form-control col-md-12" type="date" name="start-date" id="start-date">
+                		</div>
+                	
+                		<div class="form-group col-md-3">
+                            <label for="end-date" class="control-label col-md-12">End date: </label>
+                            <input class="form-control col-md-12" type="date" name="end-date" id="end-date">
+                        </div>
+                	</div>
+                		<div id="itenary-1" class="itenary row">
+                			<div class="form-group col-md-2">
+	                            <label for="place-1" class="control-label">Place:</label>
+	                            <select class="form-control col-md-12" name="place-1" id="place-1" >
+	                            	<option th:each="place : ${places}" th:value="${place.id}" th:text="${place.name}"></option>
+	                            </select>
+	                        </div>
+                	
+                            <div class="form-group col-md-2">
+                                <label for="start-date-1" class="control-label">Start date: </label>
+                                <input class="form-control col-md-12" type="date" name="start-time-1" id="start-time-1">
+                            </div>
+                	
+                            <div class="form-group col-md-2">
+                                <label for="start-time-1" class="control-label">Start time: </label>
+                                <input class="form-control col-md-12" type="time" name="start-time-1" id="start-time-1">
+                            </div>
+	                        
+                			<div class="form-group col-md-2">
+	                            <label for="end-time-1" class="control-label">End date: </label>
+	                            <input class="form-control col-md-12" type="date" name="end-time-1" id="end-time-1">
+	                        </div>
+	                        
+                			<div class="form-group col-md-2">
+	                            <label for="end-time-1" class="control-label">End time: </label>
+	                            <input class="form-control col-md-12" type="time" name="end-time-1" id="end-time-1">
+	                        </div>
+                		</div>
+                		<div id="itenary-2" class="itenary row">
+                			<div class="form-group col-md-2">
+	                            <label for="place-2" class="control-label">Place:</label>
+	                            <select class="form-control col-md-12" name="place-2" id="place-2" >
+	                            	<option th:each="place : ${places}" th:value="${place.id}" th:text="${place.name}"></option>
+	                            </select>
+	                        </div>
+                	
+                            <div class="form-group col-md-2">
+                                <label for="start-date-2" class="control-label">Start date: </label>
+                                <input class="form-control col-md-12" type="date" name="start-time-2" id="start-time-2">
+                            </div>
+                	
+                            <div class="form-group col-md-2">
+                                <label for="start-time-2" class="control-label">Start time: </label>
+                                <input class="form-control col-md-12" type="time" name="start-time-2" id="start-time-2">
+                            </div>
+	                        
+                			<div class="form-group col-md-2">
+	                            <label for="end-time-2" class="control-label">End date: </label>
+	                            <input class="form-control col-md-12" type="date" name="end-time-2" id="end-time-2">
+	                        </div>
+	                        
+                			<div class="form-group col-md-2">
+	                            <label for="end-time-2" class="control-label">End time: </label>
+	                            <input class="form-control col-md-12" type="time" name="end-time-2" id="end-time-2">
+	                        </div>
+                		</div>
+                		<div id="itenary-3" class="itenary row">
+                			<div class="form-group col-md-2">
+	                            <label for="place-3" class="control-label">Place:</label>
+	                            <select class="form-control col-md-12" name="place-3" id="place-3" >
+	                            	<option th:each="place : ${places}" th:value="${place.id}" th:text="${place.name}"></option>
+	                            </select>
+	                        </div>
+                	
+                            <div class="form-group col-md-2">
+                                <label for="start-date-3" class="control-label">Start date: </label>
+                                <input class="form-control col-md-12" type="date" name="start-time-3" id="start-time-3">
+                            </div>
+                	
+                            <div class="form-group col-md-2">
+                                <label for="start-time-3" class="control-label">Start time: </label>
+                                <input class="form-control col-md-12" type="time" name="start-time-3" id="start-time-3">
+                            </div>
+	                        
+                			<div class="form-group col-md-2">
+	                            <label for="end-time-3" class="control-label">End date: </label>
+	                            <input class="form-control col-md-12" type="date" name="end-time-3" id="end-time-3">
+	                        </div>
+	                        
+                			<div class="form-group col-md-2">
+	                            <label for="end-time-3" class="control-label">End time: </label>
+	                            <input class="form-control col-md-12" type="time" name="end-time-3" id="end-time-3">
+	                        </div>
+                		</div>
+                		<div id="itenary-4" class="itenary row">
+                			<div class="form-group col-md-2">
+	                            <label for="place-4" class="control-label">Place:</label>
+	                            <select class="form-control col-md-12" name="place-4" id="place-4" >
+	                            	<option th:each="place : ${places}" th:value="${place.id}" th:text="${place.name}"></option>
+	                            </select>
+	                        </div>
+                	
+                            <div class="form-group col-md-2">
+                                <label for="start-date-4" class="control-label">Start date: </label>
+                                <input class="form-control col-md-12" type="date" name="start-time-4" id="start-time-4">
+                            </div>
+                	
+                            <div class="form-group col-md-2">
+                                <label for="start-time-4" class="control-label">Start time: </label>
+                                <input class="form-control col-md-12" type="time" name="start-time-4" id="start-time-4">
+                            </div>
+	                        
+                			<div class="form-group col-md-2">
+	                            <label for="end-time-4" class="control-label">End date: </label>
+	                            <input class="form-control col-md-12" type="date" name="end-time-4" id="end-time-4">
+	                        </div>
+	                        
+                			<div class="form-group col-md-2">
+	                            <label for="end-time-4" class="control-label">End time: </label>
+	                            <input class="form-control col-md-12" type="time" name="end-time-4" id="end-time-4">
+	                        </div>
+                		</div>
+                	
+                	</form>
+                </div>
+
+                <div class="table-responsive well" th:if="${not #lists.isEmpty(trips)}">
+                    <table class="table table-hover table-bordered datatable">
+                        <thead>
+                            <tr>
+                                <th>Sr</th>
+                                <th>trip</th>
+                                <th>Start date</th>
+                                <th>End date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="user : ${trips}">
+                                <td> <p th:text="${user.id}"></p> </td>
+                                <td> <p th:text="${user.name}"></p> </td>
+                                <td> <p th:text="${#dates.format(user.startDate, 'yyyy-MM-dd')}"></p> </td>
+                                <td> <p th:text="${#dates.format(user.endDate, 'yyyy-MM-dd')}"></p> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="https://admin.lash3pl.com/assets/metronic/global/plugins/jquery-1.11.0.min.js"></script>
+    <script src="https://admin.lash3pl.com/assets/metronic/global/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://admin.lash3pl.com/assets/metronic/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="https://admin.lash3pl.com/assets/metronic/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            $(".table.datatable").DataTable({
+                "bPaginate": false,
+            });
+        });
+    </script>
+</body>
+</html>
