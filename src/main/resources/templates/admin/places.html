@@ -10,8 +10,8 @@
 <head>
     <link media="all" type="text/css" rel="stylesheet" href="https://admin.lash3pl.com/assets/metronic/global/plugins/bootstrap/css/bootstrap.min.css">
     <link media="all" type="text/css" rel="stylesheet" href="https://admin.lash3pl.com/assets/metronic/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css">
-    <title>Categories List - Project</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+    <title>Place List - Project</title>
     <style>
         /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
         .row.content {height: 550px}
@@ -51,34 +51,6 @@
             <div th:replace="admin/elements/sidebar.html :: sidebar"></div>
 
             <div class="col-sm-9">
-                <h3 class="title text-center">Places</h3>
-                <div class="create_form form-inline col-sm-12 well">
-                    <form class="form" action="#" th:action="@{/admin/places}" method="post">
-                        <h4 class="text-center">Add Place</h4>
-                        <ul class="errors list-group" th:if="${not #lists.isEmpty(errors)}">
-                            <li class="list-group-item" th:each="error : ${errors}" th:text="${error}"></li>
-                        </ul>
-                        <div class="form-group">
-                            <label for="city" class="control-label">Place Title:</label>
-                            <input type="text" name="title" id="title" class="form-control" value="" placeholder="Place title">
-                        </div>
-                        <div class="form-group form-actions">
-                            <input type="submit" id="submit" class="form-control">
-                        </div>    
-                    </form>
-                </div>
-                <div class="table-responsive well col-sm-12" th:if="${not #lists.isEmpty(categories)}">
-                    <table class="table table-hover table-bordered datatable">
-                        <thead>
-                            <tr>
-                                <th>Category id</th>
-                                <th>Category name</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="category : ${categories}">
-                                <td> <p th:text="${category.id}"></p> </td>
-                                <td> <p th:text="${category.name}"></p> </td>
                 <h3 class="title text-center">Places List</h3>
 
                 <div class="create-form well">
