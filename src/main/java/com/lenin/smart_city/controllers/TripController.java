@@ -161,6 +161,7 @@ public class TripController {
 			endTime[3] = request.getParameter("end-date-4") + " " + request.getParameter("end-time-4");
 			
 			Trip trip = new Trip();
+			System.out.println(startDate);
 			trip.startDate = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
 			trip.endDate = new SimpleDateFormat("yyyy-MM-dd").parse(endDate);
 			trip.bookings = new HashSet<>();

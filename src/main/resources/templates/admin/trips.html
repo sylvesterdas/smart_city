@@ -62,20 +62,20 @@
                 		</div>
                 	
                 		<div class="form-group col-md-3">
-                            <label for="start-date" class="control-label col-md-12">Start date: </label>
-                            <input class="form-control col-md-12" type="date" name="start-date" id="start-date">
+                            <label for="start_date" class="control-label col-md-12">Start date: </label>
+                            <input class="form-control col-md-12" type="date" name="start_date" id="start_date">
                 		</div>
                 	
                 		<div class="form-group col-md-3">
-                            <label for="end-date" class="control-label col-md-12">End date: </label>
-                            <input class="form-control col-md-12" type="date" name="end-date" id="end-date">
+                            <label for="end_date" class="control-label col-md-12">End date: </label>
+                            <input class="form-control col-md-12" type="date" name="end_date" id="end_date">
                         </div>
                 	</div>
                 		<div id="itenary-1" class="itenary row">
                 			<div class="form-group col-md-2">
 	                            <label for="place-1" class="control-label">Place:</label>
 	                            <select class="form-control col-md-12" name="place-1" id="place-1" >
-	                            	<option th:each="place : ${places}" th:value="${place.id}" th:text="${place.name}"></option>
+	                            	<option th:each="place : ${places}" th:value="${place.id}" th:text="${place.title}"></option>
 	                            </select>
 	                        </div>
                 	
@@ -103,7 +103,7 @@
                 			<div class="form-group col-md-2">
 	                            <label for="place-2" class="control-label">Place:</label>
 	                            <select class="form-control col-md-12" name="place-2" id="place-2" >
-	                            	<option th:each="place : ${places}" th:value="${place.id}" th:text="${place.name}"></option>
+	                            	<option th:each="place : ${places}" th:value="${place.id}" th:text="${place.title}"></option>
 	                            </select>
 	                        </div>
                 	
@@ -131,7 +131,7 @@
                 			<div class="form-group col-md-2">
 	                            <label for="place-3" class="control-label">Place:</label>
 	                            <select class="form-control col-md-12" name="place-3" id="place-3" >
-	                            	<option th:each="place : ${places}" th:value="${place.id}" th:text="${place.name}"></option>
+	                            	<option th:each="place : ${places}" th:value="${place.id}" th:text="${place.title}"></option>
 	                            </select>
 	                        </div>
                 	
@@ -159,7 +159,7 @@
                 			<div class="form-group col-md-2">
 	                            <label for="place-4" class="control-label">Place:</label>
 	                            <select class="form-control col-md-12" name="place-4" id="place-4" >
-	                            	<option th:each="place : ${places}" th:value="${place.id}" th:text="${place.name}"></option>
+	                            	<option th:each="place : ${places}" th:value="${place.id}" th:text="${place.title}"></option>
 	                            </select>
 	                        </div>
                 	
@@ -183,7 +183,9 @@
 	                            <input class="form-control col-md-12" type="time" name="end-time-4" id="end-time-4">
 	                        </div>
                 		</div>
-                	
+                		<div class="form-group form-actions">
+                			<input class="form-control" type="submit" value="Save Trip" >
+                		</div>
                 	</form>
                 </div>
 
