@@ -29,7 +29,7 @@ public class LoginAuthSuccessHandler implements AuthenticationSuccessHandler {
         User user = (User) authentication.getPrincipal();
         Role role = roleRepository.findByUserEmail(user.getUsername());
 
-        switch (role.getId().intValue()) {
+        switch (role.id.intValue()) {
             case 1: // Super Admin
                 redirectStrategy.sendRedirect(request, response, "/admin");
                 break;

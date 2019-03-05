@@ -17,13 +17,13 @@
         
         /* Set gray background color and 100% height */
         .sidenav {
-        background-color: #f1f1f1;
-        height: 100%;
+            background-color: #f1f1f1;
+            height: 100%;
         }
             
         /* On small screens, set height to 'auto' for the grid */
         @media screen and (max-width: 767px) {
-        .row.content {height: auto;} 
+            .row.content {height: auto;} 
         }
     </style>
 </head>
@@ -40,29 +40,35 @@
                     <p>Some text..</p>
                 </div>
                 <div class="row">
-                    <div class="col-sm-3">
-                    <div class="well">
-                        <h4>Users</h4>
-                        <p>1 Million</p> 
+                    <div id="users-well" class="col-sm-2">
+                        <div class="well">
+                            <h4>Users</h4>
+                            <p>1 Million</p> 
+                        </div>
                     </div>
+                    <div id="roles-well" class="col-sm-2">
+                        <div  class="well">
+                            <h4>Roles</h4>
+                            <p>100 Million</p> 
+                        </div>
                     </div>
-                    <div class="col-sm-3">
-                    <div class="well">
-                        <h4>Pages</h4>
-                        <p>100 Million</p> 
+                    <div id="countries-well" class="col-sm-2">
+                        <div class="well">
+                            <h4>Countries</h4>
+                            <p>10 Million</p> 
+                        </div>
                     </div>
+                    <div id="states-well" class="col-sm-2">
+                        <div class="well">
+                            <h4>States</h4>
+                            <p>30%</p> 
+                        </div>
                     </div>
-                    <div class="col-sm-3">
-                    <div class="well">
-                        <h4>Sessions</h4>
-                        <p>10 Million</p> 
-                    </div>
-                    </div>
-                    <div class="col-sm-3">
-                    <div class="well">
-                        <h4>Bounce</h4>
-                        <p>30%</p> 
-                    </div>
+                    <div id="cities-well" class="col-sm-2">
+                        <div class="well">
+                            <h4>Cities</h4>
+                            <p>30%</p> 
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -103,5 +109,14 @@
             </div>
         </div>
     </div>
+    <script>
+        jQuery(document).ready(function () {
+            $('div[id*="well"]').css('cursor', 'pointer');
+            $('div[id*="well"]').click(function() {
+                let location = $(this).prop('id').split('-')[0];
+                window.location = "admin/" + location;
+            });
+        });
+    </script>
 </body>
 </html>

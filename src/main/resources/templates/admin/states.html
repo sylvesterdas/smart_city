@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html lang="en" class="ie8 no-js" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
+<!--[if IE 9]>
+<html lang="en" class="ie9 no-js" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+<!-- START :: Head -->
+<head>
+    <link media="all" type="text/css" rel="stylesheet" href="https://admin.lash3pl.com/assets/metronic/global/plugins/bootstrap/css/bootstrap.min.css">
+    <link media="all" type="text/css" rel="stylesheet" href="https://admin.lash3pl.com/assets/metronic/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css">
+    <title>States - Project</title>
+    <style>
+        /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+        .row.content {height: 550px}
+        
+        /* Set gray background color and 100% height */
+        .sidenav {
+            background-color: #f1f1f1;
+            height: 100vh;
+        }
+            
+        /* On small screens, set height to 'auto' for the grid */
+        @media screen and (max-width: 767px) {
+            .row.content {height: auto;} 
+        }
+
+        .table-responsive {
+            margin: 2rem 0 0 0;
+        }
+
+        .create-form {
+            margin-top: 10px;
+            padding-top: 10px;
+        }
+
+        .form-group {
+            margin: 1rem 1rem 1rem 2rem;
+        }
+
+        .errors {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row content">
+            <div th:replace="admin/elements/sidebar.html :: sidebar"></div>
+
+            <div class="col-sm-9">
+                <h3 class="title text-center">States</h3>
+
+                <div class="create_form form-inline col-sm-12 well">
+                    <form class="form" action="#" th:action="@{/admin/states}" method="post">
+                        <h4 class="text-center">Add States</h4>
+                        <ul class="errors list-group" th:if="${not #lists.isEmpty(errors)}">
+                            <li class="list-group-item" th:each="error : ${errors}" th:text="${error}"></li>
+                        </ul>
+                        <div class="form-group">
+                            <label for="country" class="control-label">Country name:</label>
+                            <select type="text" name="country" id="country" class="form-control" value="" placeholder="State name">
+                                <option th:each="country : ${countries}" th:value="${country.id}" th:text="${country.name}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="states" class="control-label">State name:</label>
+                            <input type="text" name="states" id="states" class="form-control" value="" placeholder="State name">
+                        </div>
+                        <div class="form-group form-actions">
+                            <input type="submit" id="submit" class="form-control">
+                        </div>    
+                    </form>
+                </div>
+
+                <div class="table-responsive well col-sm-12" th:if="${not #lists.isEmpty(states)}">
+                    <table class="table table-hover table-bordered datatable">
+                        <thead>
+                            <tr>
+                                <th>Sr</th>
+                                <th>States</th>
+                                <th>Country</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="state : ${states}">
+                                <td> <p th:text="${state.id}"></p> </td>
+                                <td> <p th:text="${state.name}"></p> </td>
+                                <td> <p th:text="${state.country.name}"></p> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="https://admin.lash3pl.com/assets/metronic/global/plugins/jquery-1.11.0.min.js"></script>
+    <script src="https://admin.lash3pl.com/assets/metronic/global/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://admin.lash3pl.com/assets/metronic/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="https://admin.lash3pl.com/assets/metronic/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            $(".table.datatable").DataTable({
+                "bPaginate": false,
+            });
+        });
+    </script>
+</body>
+</html>
