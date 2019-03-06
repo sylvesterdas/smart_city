@@ -20,7 +20,7 @@ dependencies {
 	implementation 'org.springframework.session:spring-session-core'
 	implementation "org.springframework.boot:spring-boot-starter-security"
 	runtimeOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'mysql:mysql-connector-java'
+	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client:2.1.2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation "org.springframework.security:spring-security-test"
 }
