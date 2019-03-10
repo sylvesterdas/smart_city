@@ -52,14 +52,14 @@
             <div class="col-sm-9">
                 <h3 class="title text-center">Categories</h3>
                 <div class="create_form form-inline col-sm-12 well">
-                    <form class="form" action="#" th:action="@{/admin/categories}" method="post">
+                    <form class="form" id="category-form" action="#" th:action="@{/admin/categories}" method="post">
                         <h4 class="text-center">Add Category</h4>
                         <ul class="errors list-group" th:if="${not #lists.isEmpty(errors)}">
                             <li class="list-group-item" th:each="error : ${errors}" th:text="${error}"></li>
                         </ul>
                         <div class="form-group">
                             <label for="city" class="control-label">Category name:</label>
-                            <input type="text" name="category" id="category" class="form-control" value="" placeholder="Category name">
+                            <input type="text" required="required" name="category" id="category" class="form-control" value="" placeholder="Category name">
                         </div>
                         <div class="form-group form-actions">
                             <input type="submit" id="submit" class="form-control">
@@ -90,12 +90,14 @@
     <script src="https://admin.lash3pl.com/assets/metronic/global/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://admin.lash3pl.com/assets/metronic/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="https://admin.lash3pl.com/assets/metronic/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.js"></script>
     <script>
         jQuery(document).ready(function () {
             $(".table.datatable").DataTable({
                 "bPaginate": false,
             });
         });
+        $("#category-form").validate({});
     </script>
 </body>
 </html>

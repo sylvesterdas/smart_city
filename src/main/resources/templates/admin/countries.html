@@ -53,14 +53,14 @@
                 <h3 class="title text-center">Countries</h3>
 
                 <div class="create_form form-inline col-sm-8 well">
-                    <form class="form" th:object="${user}" action="#" th:action="@{/admin/countries}" method="post">
+                    <form class="form" id="countries-form" th:object="${user}" action="#" th:action="@{/admin/countries}" method="post">
                         <h4 class="text-center">Add Country</h4>
                         <ul class="errors list-group" th:if="${not #lists.isEmpty(errors)}">
                             <li class="list-group-item" th:each="error : ${errors}" th:text="${error}"></li>
                         </ul>
                         <div class="form-group">
                             <label for="country" class="control-label">Country name:</label>
-                            <input type="text" name="country" id="country" class="form-control" value="" placeholder="Country name">
+                            <input type="text" name="country" required="required" id="country" class="form-control" value="" placeholder="Country name">
                         </div>
                         <div class="form-group form-actions">
                             <input type="submit" id="submit" class="form-control">
@@ -92,12 +92,15 @@
     <script src="https://admin.lash3pl.com/assets/metronic/global/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://admin.lash3pl.com/assets/metronic/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="https://admin.lash3pl.com/assets/metronic/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.js"></script>
     <script>
         jQuery(document).ready(function () {
             $(".table.datatable").DataTable({
                 "bPaginate": false,
             });
         });
+        $("#countries-form").validate({});
+
     </script>
 </body>
 </html>
