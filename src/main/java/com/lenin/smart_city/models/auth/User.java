@@ -11,6 +11,8 @@ public class User {
 
     public  String email;
 
+    public  String fullname;
+    
     public  String password;
 
     @ManyToOne
