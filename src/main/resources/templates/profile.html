@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html lang="en" class="ie8 no-js" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
+<!--[if IE 9]>
+<html lang="en" class="ie9 no-js" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+<!-- START :: Head -->
+<head>
+    <link media="all" type="text/css" rel="stylesheet" href="https://admin.lash3pl.com/assets/metronic/global/plugins/bootstrap/css/bootstrap.min.css">
+    <link media="all" type="text/css" rel="stylesheet" href="https://admin.lash3pl.com/assets/metronic/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css">
+    <title>Categories List - Project</title>
+    <style>
+        /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+        .row.content {height: 550px}
+        
+        /* Set gray background color and 100% height */
+        .sidenav {
+            background-color: #f1f1f1;
+            height: 100%;
+        }
+            
+        /* On small screens, set height to 'auto' for the grid */
+        @media screen and (max-width: 767px) {
+            .row.content {height: auto;} 
+        }
+
+        .table-responsive {
+            margin: 2rem 0 0 0;
+        }
+
+        .create-form {
+            margin-top: 10px;
+            padding-top: 10px;
+        }
+
+        .form-group {
+            margin: 1rem 1rem 1rem 2rem;
+        }
+
+        .errors {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row content">
+            <div th:replace="sidebar.html :: sidebar"></div>
+				<div class="col-sm-6">
+            	<form class="" enctype="multipart/form-data"  id="places-form" action="#" th:action="@{/profile}" method="POST">
+                    
+            		<hr><h4>Update Profile</h4><hr>
+            			<div class="form-group">
+                            <label for="name" class="control-label">Name:</label>
+                            <input class="form-control" required="required" th:value="${theThingUWant.fullname}" type="text" name="name" id="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="control-label">Email:</label>
+                            <input class="form-control" required="required" th:value="${theThingUWant.email}" type="text" name="email" id="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="age" class="control-label">Age:</label>
+                            <input class="form-control" required="required" th:value="${theThingUWant.age}" type="number" name="age" id="age">
+                            <input class="form-control"  th:value="${theThingUWant.id}" type="hidden" name="id" id="id">
+                        </div>
+                        <div class="form-group">
+                            <label for="dob" class="control-label">DOB:</label>
+                            <input class="form-control" required="required" th:value="${theThingUWant.dob}" type="date" name="dob" id="dob">
+                        </div>
+                        <div class="form-group">
+                            <label for="file" class="">Upload Image</label>
+                            <input class="form-control" type="file" name="file" id="file" accept="image/*">                                    
+                        </div>
+	                    <div class="form-group form-actions text-center">
+	                    	<input class="btn btn-md btn-primary" type="submit" value="Update Profile" ></input>
+	                    </div>
+            </form>
+			</div>
+        </div>
+    </div>
+    <script src="https://admin.lash3pl.com/assets/metronic/global/plugins/jquery-1.11.0.min.js"></script>
+    <script src="https://admin.lash3pl.com/assets/metronic/global/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+</body>
+</html>
