@@ -231,8 +231,6 @@ public class TripController {
 			String addressLine1 = request.getParameter("line1");
 			String addressLine2 = request.getParameter("line2");
 			String landmark = request.getParameter("landmark");
-			String latitude = request.getParameter("latitude");
-			String longitude = request.getParameter("longitude");
 			City city = cityRepository.findById(Long.parseLong(request.getParameter("cities"))).get();
 			
 			try {

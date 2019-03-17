@@ -2,7 +2,12 @@ package com.lenin.smart_city.storage;
 
 public class StorageFileNotFoundException extends StorageException {
 
-    public StorageFileNotFoundException(String message) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1324512605188468710L;
+
+	public StorageFileNotFoundException(String message) {
         super(message);
     }
 
