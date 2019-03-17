@@ -13,6 +13,12 @@ public class User {
 
     public  String fullname;
     
+    public  Long age;
+    
+    public String dob;
+    
+    public String image;
+    
     public  String password;
 
     @ManyToOne

@@ -55,7 +55,7 @@
 
                 <div class="create-form well">
 
-                    <form class="" id="places-form" action="#" th:action="@{/admin/places}" method="POST">
+                    <form class="" enctype="multipart/form-data"  id="places-form" action="#" th:action="@{/admin/places}" method="POST">
                     
                         <hr><h4>Add new</h4><hr>
                         <div class="form-group">
@@ -63,9 +63,9 @@
                             <input class="form-control" required="required" type="text" name="name" id="name">
                         </div>
 
-                        <div class="form-group row">
-                        	<label for="categories" class="">Categories:</label>
-                            <select class="mdb-select col-md-6" required="required" multiple searchable="Search here.." name="categories" id="categories" th:if="${not #lists.isEmpty(categories)}">
+                        <div class="form-group">
+                        	<label for="categories" >Categories:</label>
+                            <select class="mdb-select col-md-12" required="required" multiple searchable="Search here.." name="categories" id="categories" th:if="${not #lists.isEmpty(categories)}">
                                 <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
                             </select>
                         </div>
@@ -100,7 +100,7 @@
                                 </div>
                             </div>
                         	<div class="form-inline">
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="latitude" class="">Latitude</label>
                                     <input class="form-control" required="required" type="number" step="0.000000001" name="latitude" id="latitude">
                                 </div>
@@ -108,6 +108,10 @@
                                 <div class="form-group">
                                     <label for="longitude" class="">Longitude</label>
                                     <input class="form-control" required="required" type="number" step="0.000000001" name="longitude" id="longitude">                                    
+                                </div> -->
+                                <div class="form-group">
+                                    <label for="file" class="">Upload Image</label>
+                                    <input class="form-control" type="file" name="file" id="file" accept="image/*">                                    
                                 </div>
                             </div>
                             <div class="form-group form-actions text-center">

@@ -34,7 +34,7 @@ public class Post {
 	public String subtitle;
 	
 	@Column(columnDefinition="text")
-	public String body;
+	public String body;	
 	
 	@ManyToOne
 	public Place place;

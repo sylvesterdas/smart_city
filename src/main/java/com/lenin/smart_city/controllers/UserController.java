@@ -3,6 +3,7 @@ package com.lenin.smart_city.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class UserController {
@@ -16,6 +17,11 @@ public class UserController {
             model.addAttribute("message", "You have been logged out successfully.");
 
         return "login";
+    }
+    
+    @GetMapping("/home")
+    public String home() {
+    	return "home";
     }
     
 }
