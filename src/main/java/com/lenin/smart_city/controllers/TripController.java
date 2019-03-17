@@ -40,6 +40,7 @@ import com.lenin.smart_city.repositories.PlacesRepository;
 import com.lenin.smart_city.repositories.RoleRepository;
 import com.lenin.smart_city.repositories.TripsRepository;
 import com.lenin.smart_city.storage.StorageService;
+import com.lenin.smart_city.storage.StorageService.TYPE;
 
 @Controller
 @RequestMapping(path="/admin")
@@ -155,7 +156,7 @@ public class TripController {
 			String title = request.getParameter("title");
 			String startDate = request.getParameter("start_date");
 			String endDate = request.getParameter("end_date");
-			
+
 			Place[] place = new Place[4];
 			String[] startTime = new String[4];
 			String[] endTime = new String[4];
@@ -210,11 +211,11 @@ public class TripController {
 		return null;
 	}
 	
-	@GetMapping("/files/{filename:.+}")
+	@GetMapping("/places/files/{filename:.+}")
     @ResponseBody
     public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
 
-        Resource file = storageService.loadAsResource(filename);
+        Resource file = storageService.loadAsResource(filename, TYPE.PLACES);
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
                 "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
