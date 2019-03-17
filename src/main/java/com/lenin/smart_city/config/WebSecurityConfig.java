@@ -40,6 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     "/css/**",
                     "/js/**",
                     "/images/**",
+                    "/assets/**",
                     "/scripts/**",
                     "/favicon.ico",
                     "/error/**"
