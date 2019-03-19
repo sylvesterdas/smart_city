@@ -70,6 +70,10 @@
 									<li><a href="/registration" class="button large fit">Sign up</a></li>
 								</ul>
 							</section>
+							<section >
+							 	<h3 th:text="${user}"></h3>
+							</section>
+							
 
 					</section>
 
@@ -121,7 +125,7 @@
 								<a href="#" class="logo"><img src="images/logo.jpg" alt="" /></a>
 								<header>
 									<h2>Smart City</h2>
-									<p>You perfect travel guide</p>
+									<p>Your perfect travel guide</p>
 								</header>
 							</section>
 
@@ -130,49 +134,19 @@
 								<div class="mini-posts">
 
 									<!-- Mini Post -->
-										<article class="mini-post">
+										<article class="mini-post" th:each="trips : ${trips}">
 											<header>
-												<h3><a href="#">Vitae sed condimentum</a></h3>
-												<time class="published" datetime="2015-10-20">October 20, 2015</time>
-												<a href="#" class="author"><img src="images/avatar.jpg" alt="" /></a>
+												<h2 th:text='${trips.name}'></h2>
+												<label>Start Date: </label><time class="published" th:text="${#dates.format(trips.startDate, 'yyyy-MM-dd')}">October 20, 2015</time>
+												<label>End Date: </label><time class="published" th:text="${#dates.format(trips.endDate, 'yyyy-MM-dd')}">October 20, 2015</time>
+												
 											</header>
-											<a href="#" class="image"><img src="images/pic04.jpg" alt="" /></a>
-										</article>
-
-									<!-- Mini Post -->
-										<article class="mini-post">
-											<header>
-												<h3><a href="#">Rutrum neque accumsan</a></h3>
-												<time class="published" datetime="2015-10-19">October 19, 2015</time>
-												<a href="#" class="author"><img src="images/avatar.jpg" alt="" /></a>
-											</header>
-											<a href="#" class="image"><img src="images/pic05.jpg" alt="" /></a>
-										</article>
-
-									<!-- Mini Post -->
-										<article class="mini-post">
-											<header>
-												<h3><a href="#">Odio congue mattis</a></h3>
-												<time class="published" datetime="2015-10-18">October 18, 2015</time>
-												<a href="#" class="author"><img src="images/avatar.jpg" alt="" /></a>
-											</header>
-											<a href="#" class="image"><img src="images/pic06.jpg" alt="" /></a>
-										</article>
-
-									<!-- Mini Post -->
-										<article class="mini-post">
-											<header>
-												<h3><a href="#">Enim nisl veroeros</a></h3>
-												<time class="published" datetime="2015-10-17">October 17, 2015</time>
-												<a href="#" class="author"><img src="images/avatar.jpg" alt="" /></a>
-											</header>
-											<a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
 										</article>
 
 								</div>
 							</section>
 
-						<!-- Posts List -->
+						<!-- 
 							<section>
 								<ul class="posts">
 									<li>
@@ -221,15 +195,13 @@
 										</article>
 									</li>
 								</ul>
-							</section>
+							</section> -->
 
 						<!-- About -->
 							<section class="blurb">
 								<h2>About</h2>
-								<p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod amet placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at phasellus sed ultricies.</p>
-								<ul class="actions">
-									<li><a href="#" class="button">Learn More</a></li>
-								</ul>
+								<p> Smart City to create,customize trips, great care goes into replicating the adrenaline rush and sense of control of self-planning. At the same time, we also ensure that technology does all the heavy lifting - personalization, curation, booking, reminders, on trip recommendations, etc. All of this to give you that hassle-free trip that you worked so hard year long. Go ahead, unwrap the world.</p>
+								
 							</section>
 
 						<!-- Footer -->

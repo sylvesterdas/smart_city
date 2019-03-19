@@ -43,7 +43,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     "/assets/**",
                     "/scripts/**",
                     "/favicon.ico",
-                    "/error/**"
+                    "/error/**",
+                    "/places/files/**",
+                    "/profile/files/**"
                 ).permitAll()
                 .anyRequest().authenticated()
                 .and()

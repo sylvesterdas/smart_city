@@ -211,15 +211,6 @@ public class TripController {
 		return null;
 	}
 	
-	@GetMapping("/places/files/{filename:.+}")
-    @ResponseBody
-    public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
-
-        Resource file = storageService.loadAsResource(filename, TYPE.PLACES);
-        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
-                "attachment; filename=\"" + file.getFilename() + "\"").body(file);
-    }
-	
 	@PostMapping(path="places")
 	public ModelAndView newPlace(@RequestParam("file") MultipartFile file, HttpServletRequest request, HttpServletResponse response, Principal principal) throws IOException, ParseException {
 		String name = principal.getName();

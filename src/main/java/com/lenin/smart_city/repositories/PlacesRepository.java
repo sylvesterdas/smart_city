@@ -5,7 +5,7 @@ import com.lenin.smart_city.models.locations.Place;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * UserRepository
+ * PlacesRepository
  */
 public interface PlacesRepository extends JpaRepository<Place, Long> {
     

@@ -12,12 +12,12 @@ import org.springframework.data.jpa.repository.Query;
  */
 public interface PlaceRepository extends JpaRepository<Place, Long> {
 
-    String checkExistanceQuery = "SELECT count(*) FROM places s WHERE s.title=? ";
+    String checkExistanceQuery = "SELECT count(*) FROM places s WHERE s.title=? order by id desc";
 
     @Query(nativeQuery=true, value=checkExistanceQuery)
     int checkExistance(String state);
     
-    @Query(nativeQuery=true, value="SELECT * FROM places WHERE title LIKE '%?%'")
+    @Query(nativeQuery=true, value="SELECT * FROM places WHERE title LIKE ? order by id desc")
     List<Place> getByName(String name);
     
 }

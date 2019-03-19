@@ -31,6 +31,7 @@ import com.lenin.smart_city.models.auth.Role;
 import com.lenin.smart_city.models.auth.User;
 import com.lenin.smart_city.repositories.PlaceRepository;
 import com.lenin.smart_city.repositories.RoleRepository;
+import com.lenin.smart_city.repositories.TripsRepository;
 import com.lenin.smart_city.repositories.UserRepository;
 import com.lenin.smart_city.storage.StorageService;
 import com.lenin.smart_city.storage.StorageService.TYPE;
@@ -44,6 +45,9 @@ public class MainController {
 
 	private final StorageService storageService;
 
+	@Autowired
+	private TripsRepository tripsRepository;
+	
     @Autowired
     public MainController(StorageService storageService) {
         this.storageService = storageService;
@@ -63,13 +67,16 @@ public class MainController {
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 	
     @GetMapping(path="")
-    public String index(Model model, @RequestParam(name="place", required=false) String place) {
+    public String index(Model model, @RequestParam(name="place", required=false) String place, Principal principal) {
     	if (place == null) {
     		
     		model.addAttribute("places", placeRepository.findAll());
     	} else {
     		model.addAttribute("places", placeRepository.getByName(place));
     	}
+    	model.addAttribute("trips", tripsRepository.findAll());
+    	String principalName = principal.getName();
+    	model.addAttribute("user", principalName);
         return "welcome";
     }
 
@@ -99,13 +106,21 @@ public class MainController {
     
     @GetMapping("/profile/files/{filename:.+}")
     @ResponseBody
-    public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
+    public ResponseEntity<Resource> serveProfileFile(@PathVariable String filename) {
 
         Resource file = storageService.loadAsResource(filename, TYPE.PROFILE);
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
                 "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
     
+    @GetMapping("/places/files/{filename:.+}")
+    @ResponseBody
+    public ResponseEntity<Resource> servePlacesFile(@PathVariable String filename) {
+
+        Resource file = storageService.loadAsResource(filename, TYPE.PLACES);
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
+                "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+    }
     @PostMapping(path="profile")
     public ModelAndView updateprofile(@RequestParam("file") MultipartFile file, HttpServletRequest request, HttpServletResponse response, Principal principal) throws IOException, ParseException  {
     		
