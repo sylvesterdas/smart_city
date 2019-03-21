@@ -10,6 +10,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.lenin.smart_city.models.auth.User;
+
 @Table(name="places")
 @Entity(name="places")
 public class Place {
@@ -26,6 +28,9 @@ public class Place {
 	
 	@OneToOne
 	public Address address;
+	
+	@OneToOne
+	public User author;
 
 	@ManyToMany
 	public Collection<Category> categories;

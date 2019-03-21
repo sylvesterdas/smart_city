@@ -8,17 +8,16 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,10 +29,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.lenin.smart_city.models.auth.Role;
 import com.lenin.smart_city.models.auth.User;
-import com.lenin.smart_city.models.locations.City;
+import com.lenin.smart_city.repositories.PlaceRepository;
 import com.lenin.smart_city.repositories.RoleRepository;
+import com.lenin.smart_city.repositories.TripsRepository;
 import com.lenin.smart_city.repositories.UserRepository;
 import com.lenin.smart_city.storage.StorageService;
+import com.lenin.smart_city.storage.StorageService.TYPE;
 
 /**
  * MainController
@@ -44,12 +45,18 @@ public class MainController {
 
 	private final StorageService storageService;
 
+	@Autowired
+	private TripsRepository tripsRepository;
+	
     @Autowired
     public MainController(StorageService storageService) {
         this.storageService = storageService;
     }
 	@Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Autowired
+    private PlaceRepository placeRepository;
 	
 	@Autowired
     private RoleRepository roleRepository;
@@ -60,10 +67,19 @@ public class MainController {
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 	
     @GetMapping(path="")
-    public String index(Principal principal) {
+    public String index(Model model, @RequestParam(name="place", required=false) String place, Principal principal) {
+    	if (place == null) {
+    		
+    		model.addAttribute("places", placeRepository.findAll());
+    	} else {
+    		model.addAttribute("places", placeRepository.getByName(place));
+    	}
+    	model.addAttribute("trips", tripsRepository.findAll());
+    	String principalName = principal.getName();
+    	model.addAttribute("user", principalName);
         return "welcome";
     }
-    
+
     @GetMapping(path="registration")
     public String registration(Principal principal) {
         return "registration";
@@ -88,15 +104,23 @@ public class MainController {
 		return m;
     }
     
-    @GetMapping("/files/{filename:.+}")
+    @GetMapping("/profile/files/{filename:.+}")
     @ResponseBody
-    public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
+    public ResponseEntity<Resource> serveProfileFile(@PathVariable String filename) {
 
-        Resource file = storageService.loadAsResource(filename);
+        Resource file = storageService.loadAsResource(filename, TYPE.PROFILE);
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
                 "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
     
+    @GetMapping("/places/files/{filename:.+}")
+    @ResponseBody
+    public ResponseEntity<Resource> servePlacesFile(@PathVariable String filename) {
+
+        Resource file = storageService.loadAsResource(filename, TYPE.PLACES);
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
+                "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+    }
     @PostMapping(path="profile")
     public ModelAndView updateprofile(@RequestParam("file") MultipartFile file, HttpServletRequest request, HttpServletResponse response, Principal principal) throws IOException, ParseException  {
     		

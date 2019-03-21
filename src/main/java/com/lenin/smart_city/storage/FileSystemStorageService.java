@@ -69,8 +69,9 @@ public class FileSystemStorageService implements StorageService {
     }
 
     @Override
-    public Resource loadAsResource(String filename) {
+    public Resource loadAsResource(String filename, TYPE type) {
         try {
+        	filename = (type == TYPE.PROFILE ? "profile-" : "") + filename;
             Path file = load(filename);
             Resource resource = new UrlResource(file.toUri());
             if (resource.exists() || resource.isReadable()) {
@@ -78,7 +79,7 @@ public class FileSystemStorageService implements StorageService {
             }
             else {
                 throw new StorageFileNotFoundException(
-                        "Could not read file: " + filename);
+                        "Could not read file: " + filename + " " + resource.exists());
 
             }
         }

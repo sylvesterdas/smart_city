@@ -2,7 +2,12 @@ package com.lenin.smart_city.storage;
 
 public class StorageException extends RuntimeException {
 
-    public StorageException(String message) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7256913124524190525L;
+
+	public StorageException(String message) {
         super(message);
     }
 
