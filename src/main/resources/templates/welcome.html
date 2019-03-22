@@ -14,7 +14,20 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
 	<body class="is-preload">
-
+			<div class="main-search" >
+				<form class="form-group row" method="get" action="/" style="padding-left: 30%; padding-top: 1%; margin-bottom: 0px;">
+					<div class="col-md-4">
+						<input type="text" class="form-control" name="place" placeholder="Search for a place" />
+					</div>
+					<div class="col-md-4">
+						<input type="text" class="form-control" name="city" placeholder="city" />
+					</div>								
+					<div class="col-md-4">
+						<input type="submit" class="form-control" value="Search">
+					</div>	
+							
+						</form>
+			</div>
 		<!-- Wrapper -->
 			<div id="wrapper">
 
@@ -45,11 +58,13 @@
 					<section id="menu">
 
 						<!-- Search -->
-							<section>
+							<!-- <section>
 								<form class="search" method="get" action="/">
 									<input type="text" name="place" placeholder="Search for a place" />
+									<input type="text" name="city" placeholder="city" />
+									<input type="submit">
 								</form>
-							</section>
+							</section> -->
 
 						<!-- Links -->
 							<!-- <section>
@@ -76,10 +91,10 @@
 							
 
 					</section>
+					
 
 				<!-- Main -->
 					<div id="main">
-
 						<!-- Post -->
 							<article class="post" th:each="place : ${places}">
 								<header>
@@ -119,7 +134,7 @@
 
 				<!-- Sidebar -->
 					<section id="sidebar">
-
+						
 						<!-- Intro -->
 							<section id="intro">
 								<a href="#" class="logo"><img src="images/logo.jpg" alt="" /></a>
