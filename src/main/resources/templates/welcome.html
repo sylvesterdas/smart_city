@@ -64,13 +64,13 @@
 							</section> -->
 
 						<!-- Actions -->
-							<section>
+							<section th:if="${user == null}">
 								<ul class="actions stacked">
 									<li><a href="/login" class="button large fit">Log In</a></li>
 									<li><a href="/registration" class="button large fit">Sign up</a></li>
 								</ul>
 							</section>
-							<section >
+							<section th:if="${user != null}">
 							 	<h3 th:text="${user}"></h3>
 							</section>
 							

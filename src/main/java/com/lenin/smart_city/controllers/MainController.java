@@ -75,7 +75,7 @@ public class MainController {
     		model.addAttribute("places", placeRepository.getByName(place));
     	}
     	model.addAttribute("trips", tripsRepository.findAll());
-    	String principalName = principal.getName();
+    	String principalName = principal != null ? principal.getName() : null;
     	model.addAttribute("user", principalName);
         return "welcome";
     }
