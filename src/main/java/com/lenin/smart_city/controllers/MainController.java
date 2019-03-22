@@ -67,12 +67,19 @@ public class MainController {
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 	
     @GetMapping(path="")
-    public String index(Model model, @RequestParam(name="place", required=false) String place, Principal principal) {
-    	if (place == null) {
+    public String index(Model model, @RequestParam(name="place", required=false) String place, @RequestParam(name="city", required=false) String city, Principal principal) {
+    	place = place == null ? null : (place.trim().equals("") ? null : place);
+    	city = city == null ? null : (city.trim().equals("") ? null : city);
+    	
+    	if (place == null && city == null) {
     		
     		model.addAttribute("places", placeRepository.findAll());
-    	} else {
+    	} else if (place != null && city != null) {
+    		model.addAttribute("places", placeRepository.getByNameAndCity(place, city));
+    	} else if (place != null && city == null) {
     		model.addAttribute("places", placeRepository.getByName(place));
+    	} else if (place == null && city != null) {
+    		model.addAttribute("places", placeRepository.getByCity(city));
     	}
     	model.addAttribute("trips", tripsRepository.findAll());
     	String principalName = principal != null ? principal.getName() : null;

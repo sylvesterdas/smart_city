@@ -20,4 +20,10 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
     @Query(nativeQuery=true, value="SELECT * FROM places WHERE title LIKE ? order by id desc")
     List<Place> getByName(String name);
     
+    @Query(nativeQuery=true, value="SELECT * FROM `places` as p join addresses as a ON p.address_id = a.id join cities as c ON city_id = c.id where title LIKE ? and name LIKE ?  order by p.id desc")
+    List<Place> getByNameAndCity(String name, String city);
+    
+    @Query(nativeQuery=true, value="SELECT * FROM `places` as p join addresses as a ON p.address_id = a.id join cities as c ON city_id = c.id where name LIKE ?  order by p.id desc")
+    List<Place> getByCity(String city);
+    
 }
