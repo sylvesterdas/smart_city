@@ -64,8 +64,8 @@ public class MainController {
 	
     @GetMapping(path="")
     public String index(Model model, @RequestParam(name="place", required=false) String place, @RequestParam(name="city", required=false) String city, Principal principal) {
-    	place = place == null ? null : (place.trim().equals("") ? null : place);
-    	city = city == null ? null : (city.trim().equals("") ? null : city);
+    	place = place == null ? null : (place.trim().equals("") ? null : '%' + place + '%');
+    	city = city == null ? null : (city.trim().equals("") ? null : '%' + city + '%');
     	
     	if (place == null && city == null) {
     		
