@@ -31,7 +31,6 @@ import com.lenin.smart_city.models.auth.Role;
 import com.lenin.smart_city.models.auth.User;
 import com.lenin.smart_city.repositories.PlaceRepository;
 import com.lenin.smart_city.repositories.RoleRepository;
-import com.lenin.smart_city.repositories.TripsRepository;
 import com.lenin.smart_city.repositories.UserRepository;
 import com.lenin.smart_city.storage.StorageService;
 import com.lenin.smart_city.storage.StorageService.TYPE;
@@ -44,9 +43,6 @@ import com.lenin.smart_city.storage.StorageService.TYPE;
 public class MainController {
 
 	private final StorageService storageService;
-
-	@Autowired
-	private TripsRepository tripsRepository;
 	
     @Autowired
     public MainController(StorageService storageService) {
@@ -81,7 +77,6 @@ public class MainController {
     	} else if (place == null && city != null) {
     		model.addAttribute("places", placeRepository.getByCity(city));
     	}
-    	model.addAttribute("trips", tripsRepository.findAll());
     	String principalName = principal != null ? principal.getName() : null;
     	model.addAttribute("user", principalName);
         return "welcome";
