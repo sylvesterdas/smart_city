@@ -34,7 +34,7 @@ import com.lenin.smart_city.storage.StorageService;
 
 @Controller
 @RequestMapping(path="/admin")
-public class TripController {
+public class PlacesController {
 	
 	@Autowired
 	private CategoriesRepository categoriesRepository;
@@ -55,7 +55,7 @@ public class TripController {
 	private final StorageService storageService;
 
     @Autowired
-    public TripController(StorageService storageService) {
+    public PlacesController(StorageService storageService) {
         this.storageService = storageService;
     }
     
