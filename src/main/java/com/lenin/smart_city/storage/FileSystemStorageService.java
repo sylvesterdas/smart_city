@@ -71,7 +71,7 @@ public class FileSystemStorageService implements StorageService {
     @Override
     public Resource loadAsResource(String filename, TYPE type) {
         try {
-        	filename = (type == TYPE.PROFILE ? "profile-" : "") + filename;
+        	filename = (type == TYPE.PROFILE ? "profile-" : "places-") + filename;
             Path file = load(filename);
             Resource resource = new UrlResource(file.toUri());
             if (resource.exists() || resource.isReadable()) {
