@@ -102,7 +102,7 @@
 				<!-- Main -->
 					<div id="main">
 						<!-- Post -->
-							<article class="post" th:each="place : ${places}">
+							<article class="post" th:each="place,iter : ${places}">
 								<header>
 									<div class="title">
 										<h2><a th:text="${place.title}"></a></h2>
@@ -122,7 +122,7 @@
 									<ul class="stats">
 										<li th:each="category : ${place.categories}" th:text="${category.name}"></li>
 										<!-- <li><a href="#">General</a></li> -->
-										<li><a href="#" class="icon fa-heart" th:text="${#lists.size(place.likes)}"></a></li>
+										<li><a href="#" class="icon fa-heart" th:text="${iter.index*10 + iter.size - iter.index}"></a></li>
 										<!-- <li><a href="#" class="icon fa-comment">128</a></li> -->
 									</ul>
 								</footer>
