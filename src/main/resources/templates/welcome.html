@@ -86,7 +86,7 @@
 								</ul>
 							</section>
 							<section th:if="${user != null}">
-							 	<h3 th:text="${user}"></h3>
+							 	<a th:href="@{/profile}"><h3 th:text="${user}"></h3></a>
 							 	<hr>
 							 	<a href="/profile" class="button large fit">Profile</a>
 							 	<p></p>
@@ -122,7 +122,7 @@
 									<ul class="stats">
 										<li th:each="category : ${place.categories}" th:text="${category.name}"></li>
 										<!-- <li><a href="#">General</a></li> -->
-										<li><a href="#" class="icon fa-heart" th:text="${iter.index*10 + iter.size - iter.index}"></a></li>
+										<li><a class="icon fa-heart" th:text="${T(java.lang.Math).abs(iter.index*10 + iter.size - iter.index)}"></a></li>
 										<!-- <li><a href="#" class="icon fa-comment">128</a></li> -->
 									</ul>
 								</footer>
