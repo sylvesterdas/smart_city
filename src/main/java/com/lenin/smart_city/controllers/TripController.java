@@ -34,6 +34,7 @@ import com.lenin.smart_city.repositories.CitiesRepository;
 import com.lenin.smart_city.repositories.PlacesRepository;
 import com.lenin.smart_city.repositories.RoleRepository;
 import com.lenin.smart_city.repositories.TripsRepository;
+import com.lenin.smart_city.repositories.UserRepository;
 import com.lenin.smart_city.storage.StorageService;
 
 @Controller
@@ -46,6 +47,8 @@ public class TripController {
 	private CategoriesRepository categoriesRepository;
 	@Autowired
 	private RoleRepository roleRepository;
+	@Autowired
+	private UserRepository userRepository;
 	@Autowired
 	private PlacesRepository placesRepository;
 	@Autowired
@@ -228,6 +231,7 @@ public class TripController {
 					String image = file.getOriginalFilename();
 					place.picture = image;
 				}
+				place.author = userRepository.getOneByUsername(name);
 				place.address = new Address();
 				place.address.line1 = addressLine1;
 				place.address.line2 = addressLine2;

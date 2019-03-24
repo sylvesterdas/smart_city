@@ -87,6 +87,12 @@
 							</section>
 							<section th:if="${user != null}">
 							 	<h3 th:text="${user}"></h3>
+							 	<hr>
+							 	<a href="/profile" class="button large fit">Profile</a>
+							 	<p></p>
+							 	<form action="/logout" method="post" id="logout-form">
+									<a onclick="document.getElementById('logout-form').submit();" class="button large fit">Log Out</a>
+							 	</form>
 							</section>
 							
 
@@ -96,13 +102,13 @@
 				<!-- Main -->
 					<div id="main">
 						<!-- Post -->
-							<article class="post" th:each="place : ${places}">
+							<article class="post" th:each="place,iter : ${places}">
 								<header>
 									<div class="title">
-										<h2><a th:href="${'/place/' + place.id}" th:text="${place.title}"></a></h2>
+										<h2><a th:text="${place.title}"></a></h2>
 										<p></p>
 									</div>
-									<div class="meta">
+									<div class="meta" th:if="${place.author != null}">
 										<!-- <time class="published" datetime="2015-11-01">November 1, 2015</time> -->
 										<a class="author"><span class="name" th:text="${place.author.fullname}">Jane Doe</span><img th:src="${'profile/files/' + place.author.image}" th:alt="place.author.image" /></a>
 									</div>
@@ -114,9 +120,10 @@
 										<!-- <li><a href="#" class="button large">Continue Reading</a></li> -->
 									</ul>
 									<ul class="stats">
-										<!-- <li><a href="#">General</a></li>
-										<li><a href="#" class="icon fa-heart">28</a></li>
-										<li><a href="#" class="icon fa-comment">128</a></li> -->
+										<li th:each="category : ${place.categories}" th:text="${category.name}"></li>
+										<!-- <li><a href="#">General</a></li> -->
+										<li><a href="#" class="icon fa-heart" th:text="${iter.index*10 + iter.size - iter.index}"></a></li>
+										<!-- <li><a href="#" class="icon fa-comment">128</a></li> -->
 									</ul>
 								</footer>
 							</article>
