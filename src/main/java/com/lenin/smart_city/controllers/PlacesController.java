@@ -133,9 +133,9 @@ public class PlacesController {
 			String addressLine1 = request.getParameter("line1");
 			String addressLine2 = request.getParameter("line2");
 			String landmark = request.getParameter("landmark");
-			City city = cityRepository.findById(Long.parseLong(request.getParameter("cities"))).get();
 			
 			try {
+				City city = cityRepository.findById(Long.parseLong(request.getParameter("cities"))).get();
 				Place place = new Place();
 				place.title = title;
 				place.details = detail;
@@ -162,6 +162,12 @@ public class PlacesController {
 					place.categories.add(category);
 				}
 				placesRepository.saveAndFlush(place);
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+				ModelAndView m = new ModelAndView("admin/places");
+				m.addObject("errors", new String[] {"City | Category(s) not selected"});
+				m.addObject("places", placesRepository.findAll());
+				return m;
 			} catch (DataIntegrityViolationException e) {
 				e.printStackTrace();
 				ModelAndView m = new ModelAndView("admin/places");
