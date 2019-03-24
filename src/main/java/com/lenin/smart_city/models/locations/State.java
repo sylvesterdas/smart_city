@@ -6,9 +6,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity(name="states")
-@Table(name="states")
+@Table(name="states", uniqueConstraints=@UniqueConstraint(columnNames={"name"}))
 public class State {
 
 	@Id
