@@ -81,6 +81,13 @@ public class MainController {
     	model.addAttribute("user", principalName);
         return "welcome";
     }
+    
+    @PostMapping(path="like")
+    public String like(Model model, @RequestParam(name="postId", required=true) String postId, Principal principal) {
+    	
+    	model.addAttribute("princ", principal.getName());
+    	return "welcome";
+    }
 
     @GetMapping(path="registration")
     public String registration(Principal principal) {

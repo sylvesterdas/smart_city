@@ -9,6 +9,8 @@
 <!-- START :: Head -->
 	<head>
 		<title>Smart City - Welcome</title>
+		<meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+		<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -122,7 +124,7 @@
 									<ul class="stats">
 										<li th:each="category : ${place.categories}" th:text="${category.name}"></li>
 										<!-- <li><a href="#">General</a></li> -->
-										<li><a class="icon fa-heart" th:text="${T(java.lang.Math).abs(iter.index*10 + iter.size - iter.index)}"></a></li>
+										<li><a class="icon fa-heart" th:data-post="${place.id}" onclick="like(this)" th:text="${T(java.lang.Math).abs(iter.index*10 + iter.size - iter.index)}"></a></li>
 										<!-- <li><a href="#" class="icon fa-comment">128</a></li> -->
 									</ul>
 								</footer>

@@ -4,6 +4,49 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
+function like(el) {
+	var token = $('#_csrf').attr('content');
+	var header = $('#_csrf_header').attr('content');
+	
+	var postId = $(el).data('post');
+	let data = {'postId' : postId, };
+	console.log(data);
+	$.post('like', data)
+	.done(function (res) {
+		//success
+		console.log(res);
+	}).fail(function (res) {
+		//failure
+		console.log(res);
+	});
+}
+
+function comment(el) {
+	var message = $(el).val();
+	var postId = $(el).data('post');
+	$.post('/comment', {'message' : message, 'postId': postId})
+	.done(function (res) {
+		//success
+		console.log(res);
+	}).fail(function (res) {
+		//failure
+		console.log(res);
+	});
+}
+
+function report(el) {
+	var message = $(el).val();
+	var postId = $(el).data('post');
+	$.post('/report', {'message' : message, 'postId': postId})
+	.done(function (res) {
+		//success
+		console.log(res);
+	}).fail(function (res) {
+		//failure
+		console.log(res);
+	});
+}
+
 (function($) {
 
 	var	$window = $(window),
