@@ -3486,7 +3486,74 @@ input, select, textarea {
 	body.single #footer {
 		text-align: center;
 	}
+/* Comment */
+.UserMain{
+	background:url('/images/avatar.jpg');
+	height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+.CommentSection {
+    border-top: 1px solid grey;
+    padding-top: 31px;
+}
 
+.UserPic {
+    display: flex;
+    align-items: center;
+}
+
+.UserInfo p {
+    margin-bottom: 0;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.UserInfo {
+    padding-left: 13px;
+}
+
+.CommentBox {
+    border-bottom: 1px solid #d2d2d2;
+    padding-bottom: 14px;
+    padding-top: 15px;
+}
+.commentlist {
+    height: 230px;
+    overflow-x: auto;
+}
+.reports{
+	    background: black;
+    color: #fff;
+    padding: 5px 20px 8px 20px;
+}
+.Message{
+	    margin-bottom: 0;
+    font-weight: normal;
+}
+.modalhead{
+	text-align: center;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.likesbox {
+      border-top: 1px solid #d0d0d0;
+    padding: 9px 0;
+}
+.likeslist {
+    padding: 20px 0 30px 0;
+        height: 280px;
+    overflow-x: auto;
+}
+.likesbox .UserMain {
+    background: url(/images/avatar.jpg);
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+.likesbox p {
+    font-weight: normal;
+}
 /* Menu */
 
 	#menu {

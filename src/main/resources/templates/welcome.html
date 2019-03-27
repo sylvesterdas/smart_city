@@ -14,6 +14,14 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		
+<!-- Modal jquery and css -->
+
+<!-- jQuery Modal -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
+
 	</head>
 	<body class="is-preload">
 			<div class="main-search" >
@@ -118,6 +126,22 @@
 								<a href="#" class="image featured"><img th:src="${'places/files/' + place.picture}" th:alt="place.picture" /></a>
 								<p th:text="${place.details}"></p>
 								<footer>
+								<div class="reports">
+								<a href="#ex1" rel="modal:open" class="reports">Reports</a>
+								
+								<!-- Modal HTML embedded directly into document -->
+										<div id="ex1" class="modal">
+  										<h4 class="modalhead">Submit your reports</h4>
+  										<div class="modalbody">
+  										<form class="reportform">
+  										<label class="Message">Message</label>
+  										<textarea name="comment" form="usrform">Enter text here...</textarea>
+  										</form>
+  										</div>
+  									 	<a href="#" rel="modal:close" class="reports">Close</a>
+  									 	 <a href="#" rel="modal:close" class="reports">Submit</a>
+										</div>
+								</div>
 									<ul class="actions">
 										<!-- <li><a href="#" class="button large">Continue Reading</a></li> -->
 									</ul>
@@ -126,8 +150,126 @@
 										<!-- <li><a href="#">General</a></li> -->
 										<li><a class="icon fa-heart" th:data-post="${place.id}" onclick="like(this)" th:text="${T(java.lang.Math).abs(iter.index*10 + iter.size - iter.index)}"></a></li>
 										<!-- <li><a href="#" class="icon fa-comment">128</a></li> -->
+										<li> <a href="#ex2" rel="modal:open">12344</a>
+										</li>
 									</ul>
+								<!-- Modal HTML Likes -->
+										<div id="ex2" class="modal">
+  										<h4 class="modalhead">Who like your post</h4>
+  										<div class="modalbody">
+  										<div class="likeslist">
+  										<div class="likesbox">
+  										<div class="UserPic">
+								<div class="UserMain" >
+								</div>
+								<div class="UserInfo">
+								<p>Thanos</p>
+								
+								</div>
+								</div>
+  										</div>
+  												<div class="likesbox">
+  										<div class="UserPic">
+								<div class="UserMain" >
+								</div>
+								<div class="UserInfo">
+								<p>Thanos</p>
+								
+								</div>
+								</div>
+  										</div>
+  												<div class="likesbox">
+  										<div class="UserPic">
+								<div class="UserMain" >
+								</div>
+								<div class="UserInfo">
+								<p>Thanos</p>
+								
+								</div>
+								</div>
+  										</div>
+  												<div class="likesbox">
+  										<div class="UserPic">
+								<div class="UserMain" >
+								</div>
+								<div class="UserInfo">
+								<p>Thanos</p>
+								
+								</div>
+								</div>
+  										</div>
+  										</div>
+  										</div>
+  									 	<a href="#" rel="modal:close" class="reports">Close</a>
+  									 	
+										</div>
 								</footer>
+								
+								<div class="CommentSection">
+								<h4>Comments</h4>
+								<div class="commentlist">
+								<div class="CommentBox">
+								<div class="UserPic">
+								<div class="UserMain" >
+								</div>
+								<div class="UserInfo">
+								<p>Thanos</p>
+								<span>Some Comment Some Comment Some CommentSome Comment Some Comment </span>
+								</div>
+								</div>
+								</div>
+										<div class="CommentBox">
+								<div class="UserPic">
+								<div class="UserMain" >
+								</div>
+								<div class="UserInfo">
+								<p>Thanos</p>
+								<span>Some Comment Some Comment Some CommentSome Comment Some Comment </span>
+								</div>
+								</div>
+								</div>
+										<div class="CommentBox">
+								<div class="UserPic">
+								<div class="UserMain" >
+								</div>
+								<div class="UserInfo">
+								<p>Thanos</p>
+								<span>Some Comment Some Comment Some CommentSome Comment Some Comment </span>
+								</div>
+								</div>
+								</div>
+										<div class="CommentBox">
+								<div class="UserPic">
+								<div class="UserMain" >
+								</div>
+								<div class="UserInfo">
+								<p>Thanos</p>
+								<span>Some Comment Some Comment Some CommentSome Comment Some Comment </span>
+								</div>
+								</div>
+								</div>
+										<div class="CommentBox">
+								<div class="UserPic">
+								<div class="UserMain" >
+								</div>
+								<div class="UserInfo">
+								<p>Thanos</p>
+								<span>Some Comment Some Comment Some CommentSome Comment Some Comment </span>
+								</div>
+								</div>
+								</div>
+										<div class="CommentBox">
+								<div class="UserPic">
+								<div class="UserMain" >
+								</div>
+								<div class="UserInfo">
+								<p>Thanos</p>
+								<span>Some Comment Some Comment Some CommentSome Comment Some Comment </span>
+								</div>
+								</div>
+								</div>
+								</div>
+								</div>
 							</article>
 
 						
@@ -249,6 +391,7 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 
 	</body>
 </html>
