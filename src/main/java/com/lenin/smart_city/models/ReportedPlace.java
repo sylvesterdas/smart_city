@@ -1,6 +1,5 @@
-package com.lenin.smart_city.models.trips;
+package com.lenin.smart_city.models;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,22 +8,22 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.lenin.smart_city.models.auth.User;
+import com.lenin.smart_city.models.locations.Place;
 
-@Entity(name="bookings")
-@Table(name="bookings")
-public class Booking {
+@Entity
+@Table(name="reported_places")
+public class ReportedPlace {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	public long id;
 	
 	@ManyToOne
-	public Trip trip;
+	public Place place;
 	
 	@ManyToOne
 	public User user;
 	
-	@Column(name="is_cancelled")
-	public boolean isCancelled;
+	public String message;
 	
 }

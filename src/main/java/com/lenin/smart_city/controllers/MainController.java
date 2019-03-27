@@ -31,7 +31,6 @@ import com.lenin.smart_city.models.auth.Role;
 import com.lenin.smart_city.models.auth.User;
 import com.lenin.smart_city.repositories.PlaceRepository;
 import com.lenin.smart_city.repositories.RoleRepository;
-import com.lenin.smart_city.repositories.TripsRepository;
 import com.lenin.smart_city.repositories.UserRepository;
 import com.lenin.smart_city.storage.StorageService;
 import com.lenin.smart_city.storage.StorageService.TYPE;
@@ -44,9 +43,6 @@ import com.lenin.smart_city.storage.StorageService.TYPE;
 public class MainController {
 
 	private final StorageService storageService;
-
-	@Autowired
-	private TripsRepository tripsRepository;
 	
     @Autowired
     public MainController(StorageService storageService) {
@@ -68,8 +64,8 @@ public class MainController {
 	
     @GetMapping(path="")
     public String index(Model model, @RequestParam(name="place", required=false) String place, @RequestParam(name="city", required=false) String city, Principal principal) {
-    	place = place == null ? null : (place.trim().equals("") ? null : place);
-    	city = city == null ? null : (city.trim().equals("") ? null : city);
+    	place = place == null ? null : (place.trim().equals("") ? null : '%' + place + '%');
+    	city = city == null ? null : (city.trim().equals("") ? null : '%' + city + '%');
     	
     	if (place == null && city == null) {
     		
@@ -81,10 +77,16 @@ public class MainController {
     	} else if (place == null && city != null) {
     		model.addAttribute("places", placeRepository.getByCity(city));
     	}
-    	model.addAttribute("trips", tripsRepository.findAll());
     	String principalName = principal != null ? principal.getName() : null;
     	model.addAttribute("user", principalName);
         return "welcome";
+    }
+    
+    @PostMapping(path="like")
+    public String like(Model model, @RequestParam(name="postId", required=true) String postId, Principal principal) {
+    	
+    	model.addAttribute("princ", principal.getName());
+    	return "welcome";
     }
 
     @GetMapping(path="registration")

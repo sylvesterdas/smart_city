@@ -12,7 +12,7 @@ import javax.persistence.UniqueConstraint;
 public class Country {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.TABLE)
 	public long id;
 	
 	public String name;
