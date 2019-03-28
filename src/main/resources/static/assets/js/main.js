@@ -5,19 +5,23 @@
 */
 
 function like(el) {
-	var token = $('#_csrf').attr('content');
-	var header = $('#_csrf_header').attr('content');
-	
-	var postId = $(el).data('post');
+	var element = $(el);
+	var postId = element.data('post');
 	let data = {'postId' : postId, };
 	console.log(data);
 	$.post('like', data)
 	.done(function (res) {
 		//success
-		console.log(res);
+		
 	}).fail(function (res) {
 		//failure
-		console.log(res);
+		if (res.status === 401) {
+			if (confirm(res.responseText)) {
+				window.location = "/login";
+			}
+		} else {
+			alert("Sorry, something went wrong!");
+		}
 	});
 }
 
