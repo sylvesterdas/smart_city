@@ -13,6 +13,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.lenin.smart_city.models.Comment;
+import com.lenin.smart_city.models.ReportedPlace;
 import com.lenin.smart_city.models.auth.User;
 
 @Table(name="places", uniqueConstraints=@UniqueConstraint(columnNames={"title"}))
@@ -37,6 +39,12 @@ public class Place {
 	
 	@OneToMany
 	public Set<User> likes;
+	
+	@OneToMany
+	public Set<Comment> comments;
+	
+	@OneToMany
+	public Set<ReportedPlace> reports;
 
 	@ManyToMany
 	public Collection<Category> categories;

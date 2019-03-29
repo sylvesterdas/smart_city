@@ -5,45 +5,68 @@
 */
 
 function like(el) {
-	var token = $('#_csrf').attr('content');
-	var header = $('#_csrf_header').attr('content');
-	
-	var postId = $(el).data('post');
+	var element = $(el);
+	var postId = element.data('post');
 	let data = {'postId' : postId, };
 	console.log(data);
 	$.post('like', data)
 	.done(function (res) {
 		//success
-		console.log(res);
+		if (res.status === 200) {
+			location.reload(true);
+		}
 	}).fail(function (res) {
 		//failure
-		console.log(res);
+		if (res.status === 401) {
+			if (confirm(res.responseText)) {
+				window.location = "/login";
+			}
+		} else {
+			alert("Sorry, something went wrong!");
+		}
 	});
 }
 
 function comment(el) {
-	var message = $(el).val();
 	var postId = $(el).data('post');
+	var message = $('#comment_message_' + postId).val();
 	$.post('/comment', {'message' : message, 'postId': postId})
 	.done(function (res) {
-		//success
-		console.log(res);
+		console.log(res, 'status');
+		if (res == 200) {
+			location.reload(true);
+		}
 	}).fail(function (res) {
 		//failure
-		console.log(res);
+		if (res.status === 401) {
+			if (confirm(res.responseText)) {
+				window.location = "/login";
+			}
+		} else {
+			alert("Sorry, something went wrong!");
+		}
 	});
 }
 
 function report(el) {
-	var message = $(el).val();
 	var postId = $(el).data('post');
+	var message = $('#report_' + postId).val();
+	console.log(message);
 	$.post('/report', {'message' : message, 'postId': postId})
 	.done(function (res) {
 		//success
-		console.log(res);
+		if (res.status === 200) {
+			location.reload(true);
+		}
 	}).fail(function (res) {
 		//failure
-		console.log(res);
+		if (res.status === 401) {
+			if (confirm(res.responseText)) {
+				window.location = "/login";
+			}
+		} else {
+			alert("Sorry, something went wrong!");
+		}
 	});
 }
 

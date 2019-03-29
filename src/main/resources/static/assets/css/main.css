@@ -37,6 +37,11 @@ ol, ul {
 	list-style: none;
 }
 
+.report {
+	color: red;
+    font-style: italic;
+}
+
 blockquote, q {
 	quotes: none;
 }
@@ -3519,7 +3524,8 @@ input, select, textarea {
     padding-top: 15px;
 }
 .commentlist {
-    height: 230px;
+    max-height: 230px;
+    min-height: 100px;
     overflow-x: auto;
 }
 .reports{

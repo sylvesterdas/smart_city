@@ -5,393 +5,254 @@
 <html lang="en" class="ie9 no-js" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
 <!--[if !IE]><!-->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<!--<![endif]-->
-<!-- START :: Head -->
+	<!--<![endif]-->
+	<!-- START :: Head -->
 	<head>
 		<title>Smart City - Welcome</title>
-		<meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
-		<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,
+			user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-		
-<!-- Modal jquery and css -->
 
-<!-- jQuery Modal -->
+		<!-- Modal jquery and css -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+		<!-- jQuery Modal -->
+
+		<link rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css"
+			/>
 
 
 	</head>
 	<body class="is-preload">
-			<div class="main-search" >
-				<form class="form-group row" method="get" action="/" style="padding-left: 30%; padding-top: 1%; margin-bottom: 0px;">
-					<div class="col-md-4">
-						<input type="text" class="form-control" name="place" placeholder="Search for a place" />
-					</div>
-					<div class="col-md-4">
-						<input type="text" class="form-control" name="city" placeholder="city" />
-					</div>								
-					<div class="col-md-4">
-						<input type="submit" class="form-control" value="Search">
-					</div>	
-							
-						</form>
-			</div>
+		<div class="main-search">
+			<form class="form-group row" method="get" action="/" style="padding-left:
+				30%; padding-top: 1%; margin-bottom: 0px;">
+				<div class="col-md-4">
+					<input type="text" class="form-control" name="place" placeholder="Search
+						for a place" />
+				</div>
+				<div class="col-md-4">
+					<input type="text" class="form-control" name="city" placeholder="city" />
+				</div>
+				<div class="col-md-4">
+					<input type="submit" class="form-control" value="Search">
+				</div>
+
+			</form>
+		</div>
 		<!-- Wrapper -->
-			<div id="wrapper">
+		<div id="wrapper">
 
-				<!-- Header -->
-					<header id="header">
-						<h1><a href="#">Smart City</a></h1>
-						<nav class="links">
-							<ul>
-								<li><a href="#menu">Menu</a></li>
-							</ul>
-						</nav>
-						<nav class="main">
-							<ul>
-								<li class="search">
-									<a class="fa-search" href="#search">Search</a>
-									<form id="search" method="get" action="/">
-										<input type="text" name="place" placeholder="Place" />
-									</form>
-								</li>
-								<li class="menu">
-									<a class="fa-bars" href="#menu">Menu</a>
-								</li>
-							</ul>
-						</nav>
+			<!-- Header -->
+			<header id="header">
+				<h1><a href="#">Smart City</a></h1>
+				<nav class="links">
+					<ul>
+						<li><a href="#menu">Menu</a></li>
+					</ul>
+				</nav>
+				<nav class="main">
+					<ul>
+						<li class="search">
+							<a class="fa-search" href="#search">Search</a>
+							<form id="search" method="get" action="/">
+								<input type="text" name="place" placeholder="Place" />
+							</form>
+						</li>
+						<li class="menu">
+							<a class="fa-bars" href="#menu">Menu</a>
+						</li>
+					</ul>
+				</nav>
+			</header>
+
+			<!-- Menu -->
+			<section id="menu">
+
+				<!-- Actions -->
+				<section th:if="${user == null}">
+					<ul class="actions stacked">
+						<li><a href="/login" class="button large fit">Log In</a></li>
+						<li><a href="/registration" class="button large fit">Sign up</a></li>
+					</ul>
+				</section>
+				<section th:if="${user != null}">
+					<h3 ><a th:href="@{/profile}" th:text="${user}"></a></h3>
+					<hr>
+					<a href="/profile" class="button large fit">Profile</a>
+					<p></p>
+					<form action="/logout" method="post" id="logout-form">
+						<a onclick="document.getElementById('logout-form').submit();"
+							class="button large fit">Log Out</a>
+					</form>
+				</section>
+
+
+			</section>
+
+
+			<!-- Main -->
+			<div id="main">
+				<!-- Post -->
+				<article class="post" th:each="place,iter : ${places}">
+					<header>
+						<div class="title">
+							<h2><a th:text="${place.title}"></a></h2>
+							<p class="report" th:if="${#lists.size(place.reports) > 0}" th:text="${'This place was reported by ' + #lists.size(place.reports) + ' user(s)'}"></p>
+						</div>
+						<div class="meta" th:if="${place.author != null}">
+							<!-- <time class="published" datetime="2015-11-01">November 1, 2015</time> -->
+							<a class="author"><span class="name" th:text="${place.author.fullname}">John
+									Doe</span><img th:if="${place.author.image != null}"
+									th:src="${'profile/files/' + place.author.image}"
+									th:alt="${place.author.fullname}" /></a>
+						</div>
 					</header>
+					<a href="#" class="image featured"><img th:src="${'places/files/' +
+							place.picture}" th:alt="place.picture" /></a>
+					<p th:text="${place.details}"></p>
+					<footer>
+						<div class="reports">
+							<a href="#ex1" rel="modal:open" class="reports">Reports</a>
 
-				<!-- Menu -->
-					<section id="menu">
+							<!-- Modal HTML embedded directly into document -->
+							<div id="ex1" class="modal">
+								<h4 class="modalhead">Submit your reports</h4>
+								<div class="modalbody">
+									<form class="reportform">
+										<label class="Message">Message</label>
+										<textarea th:id="${'report_' + place.id}" name="comment" form="usrform" placeholder="Enter text here..."></textarea>
+									</form>
+								</div>
+								<a href="#" rel="modal:close" class="reports">Close</a>
+								<a href="#" rel="modal:close" class="reports" th:data-post="${place.id}" onclick="report(this);">Submit</a>
+							</div>
+						</div>
+						<div class="actions">
+						</div>
+						<ul class="stats">
+							<li th:each="category : ${place.categories}" th:text="${category.name}"></li>
+							<!-- <li><a href="#">General</a></li> -->
+							<li><a class="icon fa-heart" th:data-post="${place.id}"
+									onclick="like(this)"></a>
+							<a href="#ex2" rel="modal:open" th:text="${#lists.size(place.likes)}"></a>
+							<li><a th:href="${'#comment_' + place.id}" class="icon fa-comment"th:text="${#lists.size(place.comments)}" ></a></li>
+							</li>
+						</ul>
+						<!-- Modal HTML Likes -->
+						<div id="ex2" class="modal">
+							<h4 class="modalhead">Who like your post</h4>
+							<div class="modalbody">
+								<div class="likeslist">
+									<div class="likesbox" th:each="like : ${place.likes}">
+										<div class="UserPic">
+											<div class="UserMain">
+											</div>
+											<div class="UserInfo">
+												<p th:text="${like.fullname}">Anonymous</p>
 
-						<!-- Search -->
-							<!-- <section>
-								<form class="search" method="get" action="/">
-									<input type="text" name="place" placeholder="Search for a place" />
-									<input type="text" name="city" placeholder="city" />
-									<input type="submit">
-								</form>
-							</section> -->
-
-						<!-- Links -->
-							<!-- <section>
-								<ul class="links">
-									<li>
-										<a href="#">
-											<h3>Lorem ipsum</h3>
-											<p>Feugiat tempus veroeros dolor</p>
-										</a>
-									</li>
-								</ul>
-							</section> -->
-
-						<!-- Actions -->
-							<section th:if="${user == null}">
-								<ul class="actions stacked">
-									<li><a href="/login" class="button large fit">Log In</a></li>
-									<li><a href="/registration" class="button large fit">Sign up</a></li>
-								</ul>
-							</section>
-							<section th:if="${user != null}">
-							 	<a th:href="@{/profile}"><h3 th:text="${user}"></h3></a>
-							 	<hr>
-							 	<a href="/profile" class="button large fit">Profile</a>
-							 	<p></p>
-							 	<form action="/logout" method="post" id="logout-form">
-									<a onclick="document.getElementById('logout-form').submit();" class="button large fit">Log Out</a>
-							 	</form>
-							</section>
-							
-
-					</section>
-					
-
-				<!-- Main -->
-					<div id="main">
-						<!-- Post -->
-							<article class="post" th:each="place,iter : ${places}">
-								<header>
-									<div class="title">
-										<h2><a th:text="${place.title}"></a></h2>
-										<p></p>
-									</div>
-									<div class="meta" th:if="${place.author != null}">
-										<!-- <time class="published" datetime="2015-11-01">November 1, 2015</time> -->
-										<a class="author"><span class="name" th:text="${place.author.fullname}">John Doe</span><img th:if="${place.author.image != null}" th:src="${'profile/files/' + place.author.image}" th:alt="${place.author.fullname}" /></a>
-									</div>
-								</header>
-								<a href="#" class="image featured"><img th:src="${'places/files/' + place.picture}" th:alt="place.picture" /></a>
-								<p th:text="${place.details}"></p>
-								<footer>
-								<div class="reports">
-								<a href="#ex1" rel="modal:open" class="reports">Reports</a>
-								
-								<!-- Modal HTML embedded directly into document -->
-										<div id="ex1" class="modal">
-  										<h4 class="modalhead">Submit your reports</h4>
-  										<div class="modalbody">
-  										<form class="reportform">
-  										<label class="Message">Message</label>
-  										<textarea name="comment" form="usrform">Enter text here...</textarea>
-  										</form>
-  										</div>
-  									 	<a href="#" rel="modal:close" class="reports">Close</a>
-  									 	 <a href="#" rel="modal:close" class="reports">Submit</a>
+											</div>
 										</div>
+									</div>
 								</div>
-									<ul class="actions">
-										<!-- <li><a href="#" class="button large">Continue Reading</a></li> -->
-									</ul>
-									<ul class="stats">
-										<li th:each="category : ${place.categories}" th:text="${category.name}"></li>
-										<!-- <li><a href="#">General</a></li> -->
-										<li><a class="icon fa-heart" th:data-post="${place.id}" onclick="like(this)" th:text="${T(java.lang.Math).abs(iter.index*10 + iter.size - iter.index)}"></a></li>
-										<!-- <li><a href="#" class="icon fa-comment">128</a></li> -->
-										<li> <a href="#ex2" rel="modal:open">12344</a>
-										</li>
-									</ul>
-								<!-- Modal HTML Likes -->
-										<div id="ex2" class="modal">
-  										<h4 class="modalhead">Who like your post</h4>
-  										<div class="modalbody">
-  										<div class="likeslist">
-  										<div class="likesbox">
-  										<div class="UserPic">
-								<div class="UserMain" >
-								</div>
-								<div class="UserInfo">
-								<p>Thanos</p>
-								
-								</div>
-								</div>
-  										</div>
-  												<div class="likesbox">
-  										<div class="UserPic">
-								<div class="UserMain" >
-								</div>
-								<div class="UserInfo">
-								<p>Thanos</p>
-								
-								</div>
-								</div>
-  										</div>
-  												<div class="likesbox">
-  										<div class="UserPic">
-								<div class="UserMain" >
-								</div>
-								<div class="UserInfo">
-								<p>Thanos</p>
-								
-								</div>
-								</div>
-  										</div>
-  												<div class="likesbox">
-  										<div class="UserPic">
-								<div class="UserMain" >
-								</div>
-								<div class="UserInfo">
-								<p>Thanos</p>
-								
-								</div>
-								</div>
-  										</div>
-  										</div>
-  										</div>
-  									 	<a href="#" rel="modal:close" class="reports">Close</a>
-  									 	
-										</div>
-								</footer>
-								
-								<div class="CommentSection">
-								<h4>Comments</h4>
-								<div class="commentlist">
-								<div class="CommentBox">
-								<div class="UserPic">
-								<div class="UserMain" >
-								</div>
-								<div class="UserInfo">
-								<p>Thanos</p>
-								<span>Some Comment Some Comment Some CommentSome Comment Some Comment </span>
-								</div>
-								</div>
-								</div>
-										<div class="CommentBox">
-								<div class="UserPic">
-								<div class="UserMain" >
-								</div>
-								<div class="UserInfo">
-								<p>Thanos</p>
-								<span>Some Comment Some Comment Some CommentSome Comment Some Comment </span>
-								</div>
-								</div>
-								</div>
-										<div class="CommentBox">
-								<div class="UserPic">
-								<div class="UserMain" >
-								</div>
-								<div class="UserInfo">
-								<p>Thanos</p>
-								<span>Some Comment Some Comment Some CommentSome Comment Some Comment </span>
-								</div>
-								</div>
-								</div>
-										<div class="CommentBox">
-								<div class="UserPic">
-								<div class="UserMain" >
-								</div>
-								<div class="UserInfo">
-								<p>Thanos</p>
-								<span>Some Comment Some Comment Some CommentSome Comment Some Comment </span>
-								</div>
-								</div>
-								</div>
-										<div class="CommentBox">
-								<div class="UserPic">
-								<div class="UserMain" >
-								</div>
-								<div class="UserInfo">
-								<p>Thanos</p>
-								<span>Some Comment Some Comment Some CommentSome Comment Some Comment </span>
-								</div>
-								</div>
-								</div>
-										<div class="CommentBox">
-								<div class="UserPic">
-								<div class="UserMain" >
-								</div>
-								<div class="UserInfo">
-								<p>Thanos</p>
-								<span>Some Comment Some Comment Some CommentSome Comment Some Comment </span>
-								</div>
-								</div>
-								</div>
-								</div>
-								</div>
-							</article>
+							</div>
+							<a href="#" rel="modal:close" class="reports">Close</a>
 
-						
+						</div>
+					</footer>
 
-
-						<!-- Pagination -->
-							<!-- <ul class="actions pagination">
-								<li><a href="" class="disabled button large previous">Previous Page</a></li>
-								<li><a href="#" class="button large next">Next Page</a></li>
-							</ul> -->
-
+					<div th:id="${'comment_' + place.id}" class="CommentSection">
+						<h4>Comments</h4>
+						<div class="form-inline" style="display: flex;" th:id="${'comment_form_' + place.id}">
+							<input type="text" th:id="${'comment_message_' + place.id}" />
+							<input type="button" th:data-post="${place.id}" value="comment" style="margin-left: 15px;" onclick="comment(this);" />
+						</div>
+						<div class="commentlist">
+							<div class="CommentBox" th:each="comment : ${place.comments}">
+								<div class="UserPic">
+									<div class="UserMain">
+									</div>
+									<div class="UserInfo">
+										<p th:text="${comment.user.fullname}">Anonymous</p>
+										<span th:text="${comment.message}"></span>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
+				</article>
 
-				<!-- Sidebar -->
-					<section id="sidebar">
-						
-						<!-- Intro -->
-							<section id="intro">
-								<a href="#" class="logo"><img src="images/logo.jpg" alt="" /></a>
-								<header>
-									<h2>Smart City</h2>
-									<p>Your perfect travel guide</p>
-								</header>
-							</section>
-
-						<!-- Mini Posts -->
-							<section>
-								<div class="mini-posts">
-
-									<!-- Mini Post -->
-										<article class="mini-post" th:each="trips : ${trips}">
-											<header>
-												<h2 th:text='${trips.name}'></h2>
-												<label>Start Date: </label><time class="published" th:text="${#dates.format(trips.startDate, 'yyyy-MM-dd')}">October 20, 2015</time>
-												<label>End Date: </label><time class="published" th:text="${#dates.format(trips.endDate, 'yyyy-MM-dd')}">October 20, 2015</time>
-												
-											</header>
-										</article>
-
-								</div>
-							</section>
-
-						<!-- 
-							<section>
-								<ul class="posts">
-									<li>
-										<article>
-											<header>
-												<h3><a href="#">Lorem ipsum fermentum ut nisl vitae</a></h3>
-												<time class="published" datetime="2015-10-20">October 20, 2015</time>
-											</header>
-											<a href="#" class="image"><img src="images/pic08.jpg" alt="" /></a>
-										</article>
-									</li>
-									<li>
-										<article>
-											<header>
-												<h3><a href="#">Convallis maximus nisl mattis nunc id lorem</a></h3>
-												<time class="published" datetime="2015-10-15">October 15, 2015</time>
-											</header>
-											<a href="#" class="image"><img src="images/pic09.jpg" alt="" /></a>
-										</article>
-									</li>
-									<li>
-										<article>
-											<header>
-												<h3><a href="#">Euismod amet placerat vivamus porttitor</a></h3>
-												<time class="published" datetime="2015-10-10">October 10, 2015</time>
-											</header>
-											<a href="#" class="image"><img src="images/pic10.jpg" alt="" /></a>
-										</article>
-									</li>
-									<li>
-										<article>
-											<header>
-												<h3><a href="#">Magna enim accumsan tortor cursus ultricies</a></h3>
-												<time class="published" datetime="2015-10-08">October 8, 2015</time>
-											</header>
-											<a href="#" class="image"><img src="images/pic11.jpg" alt="" /></a>
-										</article>
-									</li>
-									<li>
-										<article>
-											<header>
-												<h3><a href="#">Congue ullam corper lorem ipsum dolor</a></h3>
-												<time class="published" datetime="2015-10-06">October 7, 2015</time>
-											</header>
-											<a href="#" class="image"><img src="images/pic12.jpg" alt="" /></a>
-										</article>
-									</li>
-								</ul>
-							</section> -->
-
-						<!-- About -->
-							<section class="blurb">
-								<h2>About</h2>
-								<p> Smart City to create,customize trips, great care goes into replicating the adrenaline rush and sense of control of self-planning. At the same time, we also ensure that technology does all the heavy lifting - personalization, curation, booking, reminders, on trip recommendations, etc. All of this to give you that hassle-free trip that you worked so hard year long. Go ahead, unwrap the world.</p>
-								
-							</section>
-
-						<!-- Footer -->
-							<section id="footer">
-								<ul class="icons">
-									<li><a href="#" class="fa-twitter"><span class="label">Twitter</span></a></li>
-									<li><a href="#" class="fa-facebook"><span class="label">Facebook</span></a></li>
-									<li><a href="#" class="fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="#" class="fa-rss"><span class="label">RSS</span></a></li>
-									<li><a href="#" class="fa-envelope"><span class="label">Email</span></a></li>
-								</ul>
-							</section>
-
-					</section>
 
 			</div>
+
+			<!-- Sidebar -->
+			<section id="sidebar">
+
+				<!-- Intro -->
+				<section id="intro">
+					<a href="#" class="logo"><img src="images/logo.jpg" alt="" /></a>
+					<header>
+						<h2>Smart City</h2>
+						<p>Your perfect travel guide</p>
+					</header>
+				</section>
+
+				<!-- Mini Posts -->
+				<section>
+					<div class="mini-posts">
+
+						<!-- Mini Post -->
+						<article class="mini-post" th:each="trips : ${trips}">
+							<header>
+								<h2 th:text='${trips.name}'></h2>
+								<label>Start Date: </label><time class="published"
+									th:text="${#dates.format(trips.startDate, 'yyyy-MM-dd')}">October 20,
+									2015</time>
+								<label>End Date: </label><time class="published"
+									th:text="${#dates.format(trips.endDate, 'yyyy-MM-dd')}">October 20,
+									2015</time>
+
+							</header>
+						</article>
+
+					</div>
+				</section>
+
+				<!-- About -->
+				<section class="blurb">
+					<h2>About</h2>
+					<p> Smart City to create,customize trips, great care goes into replicating
+						the adrenaline rush and sense of control of self-planning. At the same
+						time, we also ensure that technology does all the heavy lifting -
+						personalization, curation, booking, reminders, on trip recommendations,
+						etc. All of this to give you that hassle-free trip that you worked so hard
+						year long. Go ahead, unwrap the world.</p>
+
+				</section>
+
+				<!-- Footer -->
+				<section id="footer">
+					<ul class="icons">
+						<li><a href="#" class="fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="fa-rss"><span class="label">RSS</span></a></li>
+						<li><a href="#" class="fa-envelope"><span class="label">Email</span></a></li>
+					</ul>
+				</section>
+
+			</section>
+
+		</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 	</body>
 </html>
