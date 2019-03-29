@@ -12,7 +12,9 @@ function like(el) {
 	$.post('like', data)
 	.done(function (res) {
 		//success
-		
+		if (res.status === 200) {
+			location.reload(true);
+		}
 	}).fail(function (res) {
 		//failure
 		if (res.status === 401) {
@@ -30,8 +32,10 @@ function comment(el) {
 	var message = $('#comment_message_' + postId).val();
 	$.post('/comment', {'message' : message, 'postId': postId})
 	.done(function (res) {
-		//success
-		console.log(res);
+		console.log(res, 'status');
+		if (res == 200) {
+			location.reload(true);
+		}
 	}).fail(function (res) {
 		//failure
 		if (res.status === 401) {
@@ -51,7 +55,9 @@ function report(el) {
 	$.post('/report', {'message' : message, 'postId': postId})
 	.done(function (res) {
 		//success
-		console.log(res);
+		if (res.status === 200) {
+			location.reload(true);
+		}
 	}).fail(function (res) {
 		//failure
 		if (res.status === 401) {

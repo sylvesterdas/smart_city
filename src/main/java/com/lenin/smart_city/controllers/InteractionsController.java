@@ -59,7 +59,7 @@ public class InteractionsController {
     		
 			placeRepository.saveAndFlush(place);
 			
-			return ResponseEntity.ok("Success");
+			return ResponseEntity.ok(200);
 		} else {
 			return ResponseEntity.badRequest().body("Place not found");
 		}
@@ -94,7 +94,7 @@ public class InteractionsController {
     		
 			placeRepository.saveAndFlush(place);
 			
-			return ResponseEntity.ok("Success");
+			return ResponseEntity.ok(200);
 		} else {
 			return ResponseEntity.badRequest().body("Place not found");
 		}
@@ -129,7 +129,7 @@ public class InteractionsController {
     		
 			placeRepository.saveAndFlush(place);
 			
-			return ResponseEntity.ok("Success");
+			return ResponseEntity.ok(200);
 		} else {
 			return ResponseEntity.badRequest().body("Place not found");
 		}

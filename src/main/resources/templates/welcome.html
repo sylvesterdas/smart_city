@@ -78,7 +78,7 @@
 					</ul>
 				</section>
 				<section th:if="${user != null}">
-					<a th:href="@{/profile}"><h3 th:text="${user}"></h3></a>
+					<h3 ><a th:href="@{/profile}" th:text="${user}"></a></h3>
 					<hr>
 					<a href="/profile" class="button large fit">Profile</a>
 					<p></p>
@@ -130,10 +130,6 @@
 							</div>
 						</div>
 						<div class="actions">
-							<form class="form-inline" th:id="${'comment_form_' + place.id}">
-								<input type="text" th:id="${'comment_message_' + place.id}" />
-								<input type="button" value="comment" onclick="comment(this);" />
-							</form>
 						</div>
 						<ul class="stats">
 							<li th:each="category : ${place.categories}" th:text="${category.name}"></li>
@@ -168,6 +164,10 @@
 
 					<div th:id="${'comment_' + place.id}" class="CommentSection">
 						<h4>Comments</h4>
+						<div class="form-inline" style="display: flex;" th:id="${'comment_form_' + place.id}">
+							<input type="text" th:id="${'comment_message_' + place.id}" />
+							<input type="button" th:data-post="${place.id}" value="comment" style="margin-left: 15px;" onclick="comment(this);" />
+						</div>
 						<div class="commentlist">
 							<div class="CommentBox" th:each="comment : ${place.comments}">
 								<div class="UserPic">
