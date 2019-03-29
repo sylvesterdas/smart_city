@@ -26,28 +26,41 @@ function like(el) {
 }
 
 function comment(el) {
-	var message = $(el).val();
 	var postId = $(el).data('post');
+	var message = $('#comment_message_' + postId).val();
 	$.post('/comment', {'message' : message, 'postId': postId})
 	.done(function (res) {
 		//success
 		console.log(res);
 	}).fail(function (res) {
 		//failure
-		console.log(res);
+		if (res.status === 401) {
+			if (confirm(res.responseText)) {
+				window.location = "/login";
+			}
+		} else {
+			alert("Sorry, something went wrong!");
+		}
 	});
 }
 
 function report(el) {
-	var message = $(el).val();
 	var postId = $(el).data('post');
+	var message = $('#report_' + postId).val();
+	console.log(message);
 	$.post('/report', {'message' : message, 'postId': postId})
 	.done(function (res) {
 		//success
 		console.log(res);
 	}).fail(function (res) {
 		//failure
-		console.log(res);
+		if (res.status === 401) {
+			if (confirm(res.responseText)) {
+				window.location = "/login";
+			}
+		} else {
+			alert("Sorry, something went wrong!");
+		}
 	});
 }
 

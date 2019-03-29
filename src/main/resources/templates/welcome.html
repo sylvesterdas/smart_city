@@ -9,7 +9,6 @@
 	<!-- START :: Head -->
 	<head>
 		<title>Smart City - Welcome</title>
-			/>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1,
 			user-scalable=no" />
@@ -71,25 +70,6 @@
 			<!-- Menu -->
 			<section id="menu">
 
-				<!-- Search -->
-				<!-- <section>
-								<form class="search" method="get" action="/">
-									<input type="text" name="place" placeholder="Search for a place" />
-									<input type="text" name="city" placeholder="city" />
-									<input type="submit">
-								</form>
-							</section> -->
-				<!-- Links -->
-				<!-- <section>
-								<ul class="links">
-									<li>
-										<a href="#">
-											<h3>Lorem ipsum</h3>
-											<p>Feugiat tempus veroeros dolor</p>
-										</a>
-									</li>
-								</ul>
-							</section> -->
 				<!-- Actions -->
 				<section th:if="${user == null}">
 					<ul class="actions stacked">
@@ -119,7 +99,7 @@
 					<header>
 						<div class="title">
 							<h2><a th:text="${place.title}"></a></h2>
-							<p></p>
+							<p class="report" th:if="${#lists.size(place.reports) > 0}" th:text="${'This place was reported by ' + #lists.size(place.reports) + ' user(s)'}"></p>
 						</div>
 						<div class="meta" th:if="${place.author != null}">
 							<!-- <time class="published" datetime="2015-11-01">November 1, 2015</time> -->
@@ -142,23 +122,26 @@
 								<div class="modalbody">
 									<form class="reportform">
 										<label class="Message">Message</label>
-										<textarea name="comment" form="usrform">Enter text here...</textarea>
+										<textarea th:id="${'report_' + place.id}" name="comment" form="usrform" placeholder="Enter text here..."></textarea>
 									</form>
 								</div>
 								<a href="#" rel="modal:close" class="reports">Close</a>
-								<a href="#" rel="modal:close" class="reports">Submit</a>
+								<a href="#" rel="modal:close" class="reports" th:data-post="${place.id}" onclick="report(this);">Submit</a>
 							</div>
 						</div>
-						<ul class="actions">
-							<!-- <li><a href="#" class="button large">Continue Reading</a></li> -->
-						</ul>
+						<div class="actions">
+							<form class="form-inline" th:id="${'comment_form_' + place.id}">
+								<input type="text" th:id="${'comment_message_' + place.id}" />
+								<input type="button" value="comment" onclick="comment(this);" />
+							</form>
+						</div>
 						<ul class="stats">
 							<li th:each="category : ${place.categories}" th:text="${category.name}"></li>
 							<!-- <li><a href="#">General</a></li> -->
 							<li><a class="icon fa-heart" th:data-post="${place.id}"
-									onclick="like(this)"></a></li>
-							<!-- <li><a href="#" class="icon fa-comment">128</a></li> -->
-							<li> <a href="#ex2" rel="modal:open" th:text="${#lists.size(place.likes)}">12344</a>
+									onclick="like(this)"></a>
+							<a href="#ex2" rel="modal:open" th:text="${#lists.size(place.likes)}"></a>
+							<li><a th:href="${'#comment_' + place.id}" class="icon fa-comment"th:text="${#lists.size(place.comments)}" ></a></li>
 							</li>
 						</ul>
 						<!-- Modal HTML Likes -->
@@ -183,7 +166,7 @@
 						</div>
 					</footer>
 
-					<div class="CommentSection">
+					<div th:id="${'comment_' + place.id}" class="CommentSection">
 						<h4>Comments</h4>
 						<div class="commentlist">
 							<div class="CommentBox" th:each="comment : ${place.comments}">
@@ -192,7 +175,7 @@
 									</div>
 									<div class="UserInfo">
 										<p th:text="${comment.user.fullname}">Anonymous</p>
-										<span th:text="{comment.message}"></span>
+										<span th:text="${comment.message}"></span>
 									</div>
 								</div>
 							</div>

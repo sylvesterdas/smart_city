@@ -37,6 +37,11 @@ ol, ul {
 	list-style: none;
 }
 
+.report {
+	color: red;
+    font-style: italic;
+}
+
 blockquote, q {
 	quotes: none;
 }
