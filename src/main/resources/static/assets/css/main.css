@@ -3498,16 +3498,29 @@ input, select, textarea {
     width: 50px;
     border-radius: 50%;
 }
+.UserMain img {
+	height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+.UserMain img.comment {
+	height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
 .CommentSection {
     border-top: 1px solid grey;
     padding-top: 31px;
 }
 
 .UserPic {
-    display: flex;
+	display: flex;
     align-items: center;
 }
-
+.ReportPic {
+	display: flex;
+    align-items: flex-start;
+}
 .UserInfo p {
     margin-bottom: 0;
     font-weight: bold;
@@ -3515,7 +3528,8 @@ input, select, textarea {
 }
 
 .UserInfo {
-    padding-left: 13px;
+	padding-left: 13px;
+	max-width: 350px;
 }
 
 .CommentBox {
@@ -3543,12 +3557,12 @@ input, select, textarea {
     font-weight: 600;
 }
 .likesbox {
-      border-top: 1px solid #d0d0d0;
+    border-top: 1px solid #d0d0d0;
     padding: 9px 0;
 }
 .likeslist {
     padding: 20px 0 30px 0;
-        height: 280px;
+    height: 280px;
     overflow-x: auto;
 }
 .likesbox .UserMain {
@@ -3559,6 +3573,31 @@ input, select, textarea {
 }
 .likesbox p {
     font-weight: normal;
+}
+.reportbox {
+	border-top: 1px solid #d0d0d0;
+  	padding: 9px 0;
+}
+.reportlist {
+  	padding: 20px 0 30px 0;
+	height: 280px;
+  	overflow-x: auto;
+}
+.reportbox .UserMain {
+	background: url(/images/avatar.jpg);
+	height: 40px;
+	width: 40px;
+	border-radius: 50%;
+}
+.reportbox p {
+  font-weight: normal;
+  margin: 2px auto;
+}
+.reportbox p.username {
+	font-weight: bold;
+}
+.message {
+
 }
 /* Menu */
 

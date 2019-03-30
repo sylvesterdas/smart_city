@@ -99,7 +99,7 @@
 					<header>
 						<div class="title">
 							<h2><a th:text="${place.title}"></a></h2>
-							<p class="report" th:if="${#lists.size(place.reports) > 0}" th:text="${'This place was reported by ' + #lists.size(place.reports) + ' user(s)'}"></p>
+							<a th:href="${'#report_modal_' + place.id}" rel="modal:open" class="report" th:if="${#lists.size(place.reports) > 0}" th:text="${'This place was reported by ' + #lists.size(place.reports) + ' user(s)'}"></a>
 						</div>
 						<div class="meta" th:if="${place.author != null}">
 							<!-- <time class="published" datetime="2015-11-01">November 1, 2015</time> -->
@@ -115,6 +115,28 @@
 					<footer>
 						<div class="reports">
 							<a href="#ex1" rel="modal:open" class="reports">Reports</a>
+
+							<!-- Modal HTML Likes -->
+							<div th:id="${'report_modal_' + place.id}" class="modal">
+								<h4 class="modalhead">Reported post</h4>
+								<div class="modalbody">
+									<div class="reportlist">
+										<div class="reportbox" th:each="report : ${place.reports}">
+											<div class="ReportPic">
+												<div class="UserMain">
+													<img th:src="${'profile/files/' + report.user.image}" >
+												</div>
+												<div class="UserInfo">
+													<p class="username" th:text="${report.user.fullname}">Anonymous</p>
+													<p class="message" th:text="${report.message}"></p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<a href="#" rel="modal:close" class="reports">Close</a>
+
+							</div>
 
 							<!-- Modal HTML embedded directly into document -->
 							<div id="ex1" class="modal">
@@ -142,12 +164,13 @@
 						</ul>
 						<!-- Modal HTML Likes -->
 						<div id="ex2" class="modal">
-							<h4 class="modalhead">Who like your post</h4>
+							<h4 class="modalhead">Who likes this post</h4>
 							<div class="modalbody">
 								<div class="likeslist">
 									<div class="likesbox" th:each="like : ${place.likes}">
 										<div class="UserPic">
 											<div class="UserMain">
+												<img th:src="${'profile/files/' + like.image}" >
 											</div>
 											<div class="UserInfo">
 												<p th:text="${like.fullname}">Anonymous</p>
@@ -172,6 +195,7 @@
 							<div class="CommentBox" th:each="comment : ${place.comments}">
 								<div class="UserPic">
 									<div class="UserMain">
+										<img class="comment" th:src="${'profile/files/' + comment.user.image}" >
 									</div>
 									<div class="UserInfo">
 										<p th:text="${comment.user.fullname}">Anonymous</p>

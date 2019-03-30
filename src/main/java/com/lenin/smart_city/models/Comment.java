@@ -1,5 +1,6 @@
 package com.lenin.smart_city.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,6 +20,7 @@ public class Comment {
 	@GeneratedValue(strategy=GenerationType.TABLE)
 	public long id;
 	
+	@Column(columnDefinition = "LONGTEXT")
 	public String message;
 	
 	@ManyToOne

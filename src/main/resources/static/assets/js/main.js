@@ -12,7 +12,7 @@ function like(el) {
 	$.post('like', data)
 	.done(function (res) {
 		//success
-		if (res.status === 200) {
+		if (res === 200) {
 			location.reload(true);
 		}
 	}).fail(function (res) {
@@ -55,7 +55,7 @@ function report(el) {
 	$.post('/report', {'message' : message, 'postId': postId})
 	.done(function (res) {
 		//success
-		if (res.status === 200) {
+		if (res === 200) {
 			location.reload(true);
 		}
 	}).fail(function (res) {
