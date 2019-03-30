@@ -11,8 +11,10 @@ import com.lenin.smart_city.models.auth.User;
 import com.lenin.smart_city.models.locations.City;
 import com.lenin.smart_city.models.locations.Country;
 import com.lenin.smart_city.models.locations.State;
+import com.lenin.smart_city.repositories.CategoriesRepository;
 import com.lenin.smart_city.repositories.CitiesRepository;
 import com.lenin.smart_city.repositories.CountriesRepository;
+import com.lenin.smart_city.repositories.PlaceRepository;
 import com.lenin.smart_city.repositories.RoleRepository;
 import com.lenin.smart_city.repositories.StatesRepository;
 import com.lenin.smart_city.repositories.UserRepository;
@@ -45,6 +47,12 @@ public class AdminController {
 
     @Autowired
     private CountriesRepository countriesRepository;
+
+    @Autowired
+    private CategoriesRepository catgeoriesRepository;
+
+    @Autowired
+    private PlaceRepository placeRepository;
     
     @Autowired
     private CitiesRepository citiesRepository;
@@ -65,7 +73,12 @@ public class AdminController {
 
         if (checkAdmin(principalName)) {
             ModelAndView m = new ModelAndView("admin/dashboard");
-            m.addObject("users", userRepository.findAll());
+            m.addObject("users", userRepository.count());
+            m.addObject("countries", countriesRepository.count());
+            m.addObject("states", statesRepository.count());
+            m.addObject("cities", citiesRepository.count());
+            m.addObject("categories", catgeoriesRepository.count());
+            m.addObject("places", placeRepository.count());
             return m;
         } else {
             redirectStrategy.sendRedirect(request, response, "/");

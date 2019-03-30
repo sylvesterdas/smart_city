@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" th:href="@{/assets/css/sidebar.css}">
     <style>
         /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
         .row.content {height: 550px}
@@ -19,6 +20,10 @@
         .sidenav {
             background-color: #f1f1f1;
             height: 100%;
+        }
+
+        .well h4 {
+            color: #337ab7;
         }
             
         /* On small screens, set height to 'auto' for the grid */
@@ -35,39 +40,35 @@
             <br>
             
             <div class="col-sm-9">
-                <div class="well">
+                <div class="">
                     <h4>Dashboard</h4>
                     <p></p>
                 </div>
                 <div class="row">
-                    <div id="users-well" class="col-sm-2">
+                    <div id="users-well" class="col-sm-12">
                         <div class="well">
                             <h4>Users</h4>
-                            <p></p> 
+                            <p th:text="${users}"></p> 
                         </div>
                     </div>
-                    <div id="roles-well" class="col-sm-2">
-                        <div  class="well">
-                            <h4>Roles</h4>
-                            <p></p> 
-                        </div>
-                    </div>
-                    <div id="countries-well" class="col-sm-2">
+                </div>
+                <div class="row">
+                    <div id="countries-well" class="col-sm-4">
                         <div class="well">
                             <h4>Countries</h4>
-                            <p></p> 
+                            <p th:text="${countries}"></p> 
                         </div>
                     </div>
-                    <div id="states-well" class="col-sm-2">
+                    <div id="states-well" class="col-sm-4">
                         <div class="well">
                             <h4>States</h4>
-                            <p></p> 
+                            <p th:text="${states}"></p> 
                         </div>
                     </div>
-                    <div id="cities-well" class="col-sm-2">
+                    <div id="cities-well" class="col-sm-4">
                         <div class="well">
                             <h4>Cities</h4>
-                            <p></p> 
+                            <p th:text="${cities}"></p> 
                         </div>
                     </div>
                     
@@ -76,13 +77,13 @@
                     <div id="categories-well" class="col-sm-4">
                         <div class="well">
                             <h4>Categories</h4>
-                            <p></p> 
+                            <p th:text="${categories}"></p> 
                         </div>
                     </div>
-                     <div id="places-well" class="col-sm-4">
+                     <div id="places-well" class="col-sm-8">
                         <div class="well">
                             <h4>Places</h4>
-                            <p></p> 
+                            <p th:text="${places}"></p> 
                         </div>
                     </div>
                 </div>
@@ -95,6 +96,16 @@
             $('div[id*="well"]').click(function() {
                 let location = $(this).prop('id').split('-')[0];
                 window.location = "/admin/" + location;
+            });
+        });
+        $('.well p').each(function () {
+            var $this = $(this);
+            jQuery({ Counter: 0.00 }).animate({ Counter: $this.text() }, {
+                duration: 1500,
+                easing: 'swing',
+                step: function () {
+                    $this.text(Math.ceil(this.Counter));
+                }
             });
         });
     </script>
