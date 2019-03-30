@@ -3,6 +3,7 @@ package com.lenin.smart_city.models.locations;
 import java.util.Collection;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,6 +28,7 @@ public class Place {
 	
 	public String title;
 	
+	@Column(columnDefinition = "TEXT")
 	public String details;
 	
 	public String picture;
