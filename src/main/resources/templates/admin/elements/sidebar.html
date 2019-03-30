@@ -9,10 +9,9 @@
         <li><a th:href="@{/admin/cities}">City</a></li>
         <li><a th:href="@{/admin/categories}">Categories</a></li>
         <li><a th:href="@{/admin/places}">Places</a></li>
-    </ul><br>
-    <form action="/logout" method="post" id="logout-form">
-        <a onclick="document.getElementById('logout-form').submit();" class="button large fit">Log Out</a>
-    </form>
+        <br><br><br><br>
+    </ul> <br>
+	<a class="logout-button" th:href="@{/logout}">Log Out</a>
 </div>
 
 </html>
