@@ -28,7 +28,7 @@ public class Place {
 	
 	public String title;
 	
-	@Column(columnDefinition = "TEXT")
+	@Column(columnDefinition = "LONGTEXT")
 	public String details;
 	
 	public String picture;
