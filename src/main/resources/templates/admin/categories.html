@@ -71,13 +71,11 @@
                     <table class="table table-hover table-bordered datatable">
                         <thead>
                             <tr>
-                                <th>Category id</th>
                                 <th>Category name</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="category : ${categories}">
-                                <td> <p th:text="${category.id}"></p> </td>
                                 <td> <p th:text="${category.name}"></p> </td>
                             </tr>
                         </tbody>

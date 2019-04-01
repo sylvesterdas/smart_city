@@ -73,13 +73,11 @@
                     <table class="table table-hover table-bordered datatable">
                         <thead>
                             <tr>
-                                <th>Sr</th>
                                 <th>Country</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="country : ${countries}">
-                                <td> <p th:text="${country.id}"></p> </td>
                                 <td> <p th:text="${country.name}"></p> </td>
                             </tr>
                         </tbody>

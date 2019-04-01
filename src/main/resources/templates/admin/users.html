@@ -83,14 +83,12 @@
                     <table class="table table-hover table-bordered datatable">
                         <thead>
                             <tr>
-                                <th>Sr</th>
                                 <th>Email</th>
                                 <th>Role</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="user : ${users}">
-                                <td> <p th:text="${user.id}"></p> </td>
                                 <td> <p th:text="${user.email}"></p> </td>
                                 <td> <p th:text="${user.role.name}"></p> </td>
                             </tr>
