@@ -30,6 +30,10 @@ function like(el) {
 function comment(el) {
 	var postId = $(el).data('post');
 	var message = $('#comment_message_' + postId).val();
+	if (message.trim().length < 1) {
+		console.log('khali hai');
+		return;
+	}
 	$.post('/comment', {'message' : message, 'postId': postId})
 	.done(function (res) {
 		console.log(res, 'status');
@@ -51,6 +55,10 @@ function comment(el) {
 function report(el) {
 	var postId = $(el).data('post');
 	var message = $('#report_' + postId).val();
+	if (message.trim().length < 1) {
+		console.log('khali hai');
+		return;
+	}
 	console.log(message);
 	$.post('/report', {'message' : message, 'postId': postId})
 	.done(function (res) {
