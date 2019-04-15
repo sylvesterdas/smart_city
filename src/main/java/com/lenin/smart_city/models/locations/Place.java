@@ -3,6 +3,7 @@ package com.lenin.smart_city.models.locations;
 import java.util.Collection;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,7 +40,7 @@ public class Place {
 	@OneToOne
 	public User author;
 	
-	@OneToMany
+	@ManyToMany(cascade=CascadeType.ALL)
 	public Set<User> likes;
 	
 	@OneToMany
